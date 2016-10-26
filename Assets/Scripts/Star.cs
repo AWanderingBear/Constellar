@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//THIS SHOULD BE ADDED TO ANNES STAR BEHAVIOUR SCRIPT.
+
+
 public class Star : MonoBehaviour {
 
     public StarManager starLinkManager; //Handle to the starlink manager.
