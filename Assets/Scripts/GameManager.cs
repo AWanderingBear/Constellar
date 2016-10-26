@@ -3,13 +3,13 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    GameObject Star;
-
+    // Different types of stars
     public enum StarType
     {
         Normal,
         Aura,
-        NoCol
+        NoCol,
+        Split
     };
 
     // Use this for initialization
