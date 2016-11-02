@@ -75,9 +75,9 @@ public class StarBehaviour : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.name != "") 
+            StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
+            if (hit.collider.tag == "Star" && star.alreadyLinked == false)
             {
-                StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
                 starLinkManager.ProcessStarLinking(star);
             }
         }

@@ -27,9 +27,11 @@ public class StarManager : MonoBehaviour
             {
                 UpdateLine(currentlySelectedStar, mousePos);
             }
+
            if (Input.GetMouseButtonUp(0) && currentlySelectedStar.earlyRelease == true)
             {
                 Destroy(tempConnection);
+                collision = false;
             }
         }
 
@@ -84,21 +86,28 @@ public class StarManager : MonoBehaviour
             return;
         }
 
-        else
-        {
-            if (!_star.alreadyLinked)
+        else if (!_star.alreadyLinked)
+         {
+            Debug.Log("BNOT Linked passed");
+            if (_star == currentlySelectedStar)
             {
-                if (_star == currentlySelectedStar)
-                {
-                    DrawLine(currentlySelectedStar, mousePos);
-                }
+                Debug.Log("Star: " + currentlySelectedStar);
+                DrawLine(currentlySelectedStar, mousePos);
             }
+         }
             else
             {
-                return;
+                Debug.Log("Not Linked passed");
+                Debug.Log(_star + "--" + currentlySelectedStar);
+                if (_star == currentlySelectedStar)
+                {
+                    Debug.Log("Star: " + currentlySelectedStar);
+                    DrawLine(currentlySelectedStar, mousePos);
+                }
+                //return;
             }
         }
-    }
+
 
     void AttemptLink(StarBehaviour _starOne, StarBehaviour _starTwo)
     {
@@ -117,6 +126,7 @@ public class StarManager : MonoBehaviour
 
             if (vision.collider.tag == "Star")
             {
+                Debug.Log("Colliding with: " + vision.collider.tag);
                 drawRay = true;
                 //Debug.Log("hit");
                 LinkStars(_starOne, _starTwo);
@@ -126,6 +136,7 @@ public class StarManager : MonoBehaviour
             }
             else if (vision.collider.tag == "Planet")
             {
+                Debug.Log("Colliding with: " + vision.collider.tag);
                 drawRay = true;
                 //Debug.Log("hit");
                 LinkStars(_starOne, _starTwo);
@@ -137,6 +148,7 @@ public class StarManager : MonoBehaviour
             // ignore collision if the star is a no collision star type
             else if (vision.collider.tag == "Line" && currentlySelectedStar.starType == GameManager.StarType.NoCol)
             {
+                Debug.Log("Colliding with: " + vision.collider.tag);
                 drawRay = true;
                 //Debug.Log("hit");
                 LinkStars(_starOne, _starTwo);
@@ -148,7 +160,8 @@ public class StarManager : MonoBehaviour
             else
             {
                 Debug.Log("Colliding with: " + vision.collider.tag);
-                Destroy(tempConnection);
+                collision = true;
+                //Destroy(tempConnection);
             }
         }
     }
@@ -182,20 +195,22 @@ public class StarManager : MonoBehaviour
 
 
         //Create the Game Object
-        tempConnection = (GameObject)Instantiate(connectingLinePrefab, newLinePosition, rotationQuat);
-        tempConnection.transform.parent = LinkHolder.transform;
+        GameObject lineConnection = (GameObject)Instantiate(connectingLinePrefab, newLinePosition, rotationQuat);
+        lineConnection.transform.parent = LinkHolder.transform;
 
         //Set Scale
-        tempConnection.transform.localScale = new Vector3(connectionLength, 0.05f, 1.0f);
+        lineConnection.transform.localScale = new Vector3(connectionLength, 0.05f, 1.0f);
 
 
         //Create the Line Renderer
-        line = tempConnection.AddComponent<LineRenderer>();
+        line = lineConnection.AddComponent<LineRenderer>();
         line.SetVertexCount(2);
         line.SetWidth(0.05f, 0.05f);
         line.useWorldSpace = true;
         line.SetPosition(0, _starOne.transform.position);
         line.SetPosition(1, _starTwo.transform.position);
+
+        Destroy(tempConnection);
     }
 
     void DrawLine(StarBehaviour _starOne, Vector3 mousePos)
@@ -237,6 +252,7 @@ public class StarManager : MonoBehaviour
         line.useWorldSpace = true;
         line.SetPosition(0, _starOne.transform.position);
         line.SetPosition(1, mousePos);
+
     }
 
     public void UpdateLine(StarBehaviour _starOne, Vector3 mousePos)
@@ -257,8 +273,8 @@ public class StarManager : MonoBehaviour
         float minimumY = Mathf.Min(_starOne.transform.position.y, mousePos.y);
 
         // Update the line renderer
-        line.SetVertexCount(2);
-        line.SetWidth(0.05f, 0.05f);
+        //line.SetVertexCount(2);
+        //line.SetWidth(0.05f, 0.05f);
         line.useWorldSpace = true;
         line.SetPosition(0, _starOne.transform.position);
         Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 0);
