@@ -26,4 +26,5 @@ public class GameManager : MonoBehaviour {
         energyText.text = "Current Energy: " + tempEnergy;
         
     }
+  
 }

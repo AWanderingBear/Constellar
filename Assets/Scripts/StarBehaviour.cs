@@ -5,9 +5,14 @@ public class StarBehaviour : MonoBehaviour
 {
     public GameObject StarObject;
     public GameManager.StarType starType;
-    public StarManager starLinkManager; //Handle to the starlink manager.
-    public bool alreadyLinked = false;
-    private bool alreadySplit = false;
+    public StarManager starLinkManager;  //Handle to the starlink manager.
+    public bool alreadyLinked;
+    public bool mouseHeld;
+    public bool earlyRelease;
+    private bool alreadySplit;
+
+    Ray ray;
+    RaycastHit hit;
 
     // Use this for initialization
     void Start()
@@ -51,13 +56,36 @@ public class StarBehaviour : MonoBehaviour
     // Processes star linking when mouse is down
     void OnMouseDown()
     {
-        starLinkManager.ProcessStarLinking(this);
-        if (starLinkManager.drawing == true)
+        starLinkManager.StartLineDrawing(this);
+        earlyRelease = false;
+        Debug.Log("Mouse click");
+    }
+
+    // When mouse is being held, return true
+    void OnMouseDrag()
+    {
+        mouseHeld = true;
+        
+    }
+
+    // When mouse is released
+    void OnMouseUp()
+    {       
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("Mouse clicked");
-            starLinkManager.AttemptLink(starLinkManager.currentlySelectedStar, this);
+            if (hit.collider.name != "") 
+            {
+                StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
+                starLinkManager.ProcessStarLinking(star);
+            }
         }
-        starLinkManager.drawing = true;
+        else
+        {
+            mouseHeld = false;
+            earlyRelease = true;
+        }
     }
 
     // Basic star behaviour
