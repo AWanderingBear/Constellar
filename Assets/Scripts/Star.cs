@@ -20,7 +20,7 @@ public class Star : MonoBehaviour {
 
     void OnMouseDown()
     {
-        starLinkManager.ProcessStarLinking(this);
+        //starLinkManager.ProcessStarLinking(this);
         print("Star Clicked: " + name);
     }
 }

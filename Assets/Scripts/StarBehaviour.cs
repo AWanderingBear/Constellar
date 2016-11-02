@@ -5,11 +5,14 @@ public class StarBehaviour : MonoBehaviour
 {
     public GameObject StarObject;
     public GameManager.StarType starType;
+    public StarManager starLinkManager; //Handle to the starlink manager.
+    public bool alreadyLinked = false;
+    private bool alreadySplit = false;
 
     // Use this for initialization
     void Start()
     {
-
+        starLinkManager = GetComponentInParent<StarManager>();
     }
 
     // Update is called once per frame
@@ -23,8 +26,6 @@ public class StarBehaviour : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse clicked");
-
             switch (starType)
             {
                 case GameManager.StarType.Normal:
@@ -41,10 +42,22 @@ public class StarBehaviour : MonoBehaviour
                     break;
                 case GameManager.StarType.Split:
                     Debug.Log("Splitting Star");
-                    SplitBehaviour();
+                    SplitBehaviour(this);
                     break;
             }
         }
+    }
+
+    // Processes star linking when mouse is down
+    void OnMouseDown()
+    {
+        starLinkManager.ProcessStarLinking(this);
+        if (starLinkManager.drawing == true)
+        {
+            Debug.Log("Mouse clicked");
+            starLinkManager.AttemptLink(starLinkManager.currentlySelectedStar, this);
+        }
+        starLinkManager.drawing = true;
     }
 
     // Basic star behaviour
@@ -62,11 +75,21 @@ public class StarBehaviour : MonoBehaviour
 
     // Star mechanic 2
     // A star that creates more stars when attached to that are signalled at all times
-    void SplitBehaviour()
+    void SplitBehaviour(StarBehaviour currentStar)
     {
-        GameObject CloneOne = Instantiate(StarObject, gameObject.transform.GetChild(0).position, Quaternion.identity) as GameObject;
-        GameObject CloneTwo = Instantiate(StarObject, gameObject.transform.GetChild(1).position, Quaternion.identity) as GameObject;
-        GameObject CloneThree = Instantiate(StarObject, gameObject.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+        if (!currentStar.alreadySplit)
+        {
+            GameObject CloneOne = Instantiate(StarObject, gameObject.transform.GetChild(0).position, Quaternion.identity) as GameObject;
+            GameObject CloneTwo = Instantiate(StarObject, gameObject.transform.GetChild(1).position, Quaternion.identity) as GameObject;
+            GameObject CloneThree = Instantiate(StarObject, gameObject.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+
+            CloneOne.transform.parent = gameObject.transform;
+            CloneTwo.transform.parent = gameObject.transform;
+            CloneThree.transform.parent = gameObject.transform;
+
+            currentStar.alreadySplit = true;
+            
+        }
     }
 
     // Star mechanic 3
