@@ -10,7 +10,7 @@ public class StarBehaviour : MonoBehaviour
     public bool mouseHeld;
     public bool earlyRelease;
     private bool alreadySplit;
-
+    private float downTime;
     Ray ray;
     RaycastHit hit;
 
@@ -34,19 +34,19 @@ public class StarBehaviour : MonoBehaviour
             switch (starType)
             {
                 case GameManager.StarType.Normal:
-                    Debug.Log("Normal Star");
+                    Debug.Log("Clicked a Normal Star");
                     BasicBehaviour();
                     break;
                 case GameManager.StarType.NoCol:
-                    Debug.Log("No Collision Star");
+                    Debug.Log("Clicked a No Collision Star");
                     NoCollisionBehaviour();
                     break;
                 case GameManager.StarType.Aura:
-                    Debug.Log("Aura Star");
+                    Debug.Log("Clicked a Aura Star");
                     AuraBehaviour();
                     break;
                 case GameManager.StarType.Split:
-                    Debug.Log("Splitting Star");
+                    Debug.Log("Clicked a Splitting Star");
                     SplitBehaviour(this);
                     break;
             }
@@ -58,32 +58,42 @@ public class StarBehaviour : MonoBehaviour
     {
         starLinkManager.StartLineDrawing(this);
         earlyRelease = false;
-        Debug.Log("Mouse click");
+        
     }
 
     // When mouse is being held, return true
     void OnMouseDrag()
     {
         mouseHeld = true;
-        
+        downTime += Time.deltaTime;
+        if (downTime > 0.2f)
+        {
+            starLinkManager.drawing = true; 
+        }
+        Debug.Log(downTime);
     }
 
     // When mouse is released
     void OnMouseUp()
-    {       
+    {
+        // Turn mouse held boolean off
+        mouseHeld = false;
+
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        // reset timer
+        downTime = 0.0f;
 
         if (Physics.Raycast(ray, out hit))
         {
             StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
-            if (hit.collider.tag == "Star" && star.alreadyLinked == false)
+            if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
             {
                 starLinkManager.ProcessStarLinking(star);
             }
         }
         else
         {
-            mouseHeld = false;
             earlyRelease = true;
         }
     }

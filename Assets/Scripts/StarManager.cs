@@ -16,23 +16,29 @@ public class StarManager : MonoBehaviour
     public Vector3 mousePos;
 
     private bool drawRay;
-    public bool selected;
-    public bool collision;
+    private bool selected;
+    public bool drawing;
 
     void Update()
     {
-        if (selected == true)
+        if (selected)
         {
             if (currentlySelectedStar.mouseHeld == true)
             {
                 UpdateLine(currentlySelectedStar, mousePos);
+                Debug.Log("Updating");
             }
 
-           if (Input.GetMouseButtonUp(0) && currentlySelectedStar.earlyRelease == true)
+            if (Input.GetMouseButtonUp(0) && currentlySelectedStar.earlyRelease)
             {
+                selected = false;
                 Destroy(tempConnection);
-                collision = false;
             }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+            {
+            drawing = false;
         }
 
         if (drawRay == true)
@@ -79,31 +85,30 @@ public class StarManager : MonoBehaviour
     {
         if (currentlySelectedStar == null)
         {
+            selected = true;
             currentlySelectedStar = _star;
             Debug.Log("Selected star: " + currentlySelectedStar);
-            selected = true;
             DrawLine(currentlySelectedStar, mousePos);
             return;
         }
 
         else if (!_star.alreadyLinked)
          {
-            Debug.Log("BNOT Linked passed");
             if (_star == currentlySelectedStar)
             {
-                Debug.Log("Star: " + currentlySelectedStar);
+                selected = true;
                 DrawLine(currentlySelectedStar, mousePos);
+                return;
             }
          }
             else
             {
-                Debug.Log("Not Linked passed");
-                Debug.Log(_star + "--" + currentlySelectedStar);
                 if (_star == currentlySelectedStar)
                 {
-                    Debug.Log("Star: " + currentlySelectedStar);
-                    DrawLine(currentlySelectedStar, mousePos);
-                }
+                selected = true;
+                DrawLine(currentlySelectedStar, mousePos);
+                return;
+            }
                 //return;
             }
         }
@@ -112,7 +117,6 @@ public class StarManager : MonoBehaviour
     void AttemptLink(StarBehaviour _starOne, StarBehaviour _starTwo)
     {
         //if raycast returns the star.
-        collision = false;
         Vector3 raycastDirection;
         raycastDirection = new Vector3(_starTwo.transform.position.x - _starOne.transform.position.x,
                                        _starTwo.transform.position.y - _starOne.transform.position.y, 0.0f);
@@ -160,8 +164,7 @@ public class StarManager : MonoBehaviour
             else
             {
                 Debug.Log("Colliding with: " + vision.collider.tag);
-                collision = true;
-                //Destroy(tempConnection);
+                currentlySelectedStar.earlyRelease = true;
             }
         }
     }
@@ -252,34 +255,15 @@ public class StarManager : MonoBehaviour
         line.useWorldSpace = true;
         line.SetPosition(0, _starOne.transform.position);
         line.SetPosition(1, mousePos);
-
     }
 
     public void UpdateLine(StarBehaviour _starOne, Vector3 mousePos)
     {
-        //Finding the distance vector
-        float differenceX = (_starOne.transform.position.x - mousePos.x);
-        float differenceY = (_starOne.transform.position.y - mousePos.y);
-
-        //Finding the Line Z Angle        //SOH CAH --> TOA <--
-        float angleZ = Mathf.Rad2Deg * Mathf.Atan((differenceY / differenceX));   //should give angle
-
-        //The rest of the math relies on these both being positive.
-        differenceX = Mathf.Abs(differenceX);
-        differenceY = Mathf.Abs(differenceY);
-
-        //Finding the Position - minimum x and y plus half of the distance between the two x's and y'x returns the middle of the game world vector.
-        float minimumX = Mathf.Min(_starOne.transform.position.x, mousePos.x);
-        float minimumY = Mathf.Min(_starOne.transform.position.y, mousePos.y);
-
         // Update the line renderer
-        //line.SetVertexCount(2);
-        //line.SetWidth(0.05f, 0.05f);
         line.useWorldSpace = true;
         line.SetPosition(0, _starOne.transform.position);
         Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 0);
         line.SetPosition(1, tempPos);
-     
     }
 
 
