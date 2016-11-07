@@ -6,7 +6,7 @@ public class StarBehaviour : MonoBehaviour
     public GameObject StarObject;
     public GameManager.StarType starType;
     public StarManager starLinkManager;  //Handle to the starlink manager.
-    public bool alreadyLinked;
+    public bool alreadyLinked = false;
     public bool mouseHeld;
     public bool earlyRelease;
     private bool alreadySplit;
@@ -35,19 +35,21 @@ public class StarBehaviour : MonoBehaviour
             {
                 case GameManager.StarType.Normal:
                     Debug.Log("Clicked a Normal Star");
-                    BasicBehaviour();
+                    //Debug.Log(alreadyLinked);
                     break;
                 case GameManager.StarType.NoCol:
                     Debug.Log("Clicked a No Collision Star");
-                    NoCollisionBehaviour();
+                    //Debug.Log(alreadyLinked);
                     break;
                 case GameManager.StarType.Aura:
                     Debug.Log("Clicked a Aura Star");
+                    //Debug.Log(alreadyLinked);
                     AuraBehaviour();
                     break;
                 case GameManager.StarType.Split:
                     Debug.Log("Clicked a Splitting Star");
-                    SplitBehaviour(this);
+                    //Debug.Log(alreadyLinked);
+                    //SplitBehaviour(this);
                     break;
             }
         }
@@ -66,11 +68,11 @@ public class StarBehaviour : MonoBehaviour
     {
         mouseHeld = true;
         downTime += Time.deltaTime;
+
         if (downTime > 0.2f)
         {
             starLinkManager.drawing = true; 
         }
-        Debug.Log(downTime);
     }
 
     // When mouse is released
@@ -81,28 +83,42 @@ public class StarBehaviour : MonoBehaviour
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        // reset timer
-        downTime = 0.0f;
-
         if (Physics.Raycast(ray, out hit))
         {
             StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
+
             if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
             {
+
+                // if the star is a splitting star
+                if (star.starType == GameManager.StarType.Split)
+                {
+                    SplitBehaviour(star);
+                }
+
                 starLinkManager.ProcessStarLinking(star);
+                starLinkManager.firstSelected = true;          
             }
+
+            else if (star.alreadyLinked)
+                {
+                    earlyRelease = true;
+                }
         }
         else
+        {    
+            earlyRelease = true;
+        }
+
+        if (downTime < 0.2f)
         {
             earlyRelease = true;
         }
+
+        // reset timer
+        downTime = 0.0f;
     }
 
-    // Basic star behaviour
-    void BasicBehaviour()
-    {
-
-    }
 
     // Star mechanic 1
     // A star with an aura that drives away darkness and inside which jumping costs nothing
@@ -117,28 +133,17 @@ public class StarBehaviour : MonoBehaviour
     {
         if (!currentStar.alreadySplit)
         {
-            GameObject CloneOne = Instantiate(StarObject, gameObject.transform.GetChild(0).position, Quaternion.identity) as GameObject;
-            GameObject CloneTwo = Instantiate(StarObject, gameObject.transform.GetChild(1).position, Quaternion.identity) as GameObject;
-            GameObject CloneThree = Instantiate(StarObject, gameObject.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+            GameObject CloneOne = Instantiate(StarObject, currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
+            GameObject CloneTwo = Instantiate(StarObject, currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
+            GameObject CloneThree = Instantiate(StarObject, currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
 
-            CloneOne.transform.parent = gameObject.transform;
-            CloneTwo.transform.parent = gameObject.transform;
-            CloneThree.transform.parent = gameObject.transform;
+            CloneOne.transform.parent = currentStar.transform;
+            CloneTwo.transform.parent = currentStar.transform;
+            CloneThree.transform.parent = currentStar.transform;
 
             currentStar.alreadySplit = true;
             
         }
     }
-
-    // Star mechanic 3
-    // A star that allows players to not collide with lines when jumping off of it
-    // Ignore line colliders (Amberoni)
-    void NoCollisionBehaviour()
-    {
-
-    }
-
-    // Particle effects (future)
-
 }
  

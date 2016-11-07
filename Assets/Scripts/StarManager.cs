@@ -16,6 +16,7 @@ public class StarManager : MonoBehaviour
     public Vector3 mousePos;
 
     private bool drawRay;
+    public bool firstSelected;
     private bool selected;
     public bool drawing;
 
@@ -26,20 +27,26 @@ public class StarManager : MonoBehaviour
             if (currentlySelectedStar.mouseHeld == true)
             {
                 UpdateLine(currentlySelectedStar, mousePos);
-                Debug.Log("Updating");
+                //Debug.Log("Updating");
             }
 
+            // on early mouse release
             if (Input.GetMouseButtonUp(0) && currentlySelectedStar.earlyRelease)
             {
+                if (!firstSelected)
+                {
+                    currentlySelectedStar = null;
+                }
                 selected = false;
                 Destroy(tempConnection);
             }
         }
 
+        // on mouse release
         if (Input.GetMouseButtonUp(0))
             {
-            drawing = false;
-        }
+                drawing = false;
+            }
 
         if (drawRay == true)
         {
@@ -50,22 +57,14 @@ public class StarManager : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    //  START OF THE CODE:
-    public void ProcessStarLinking(StarBehaviour _star)  //Called by the stars themselves onMouseDown. 
+    public void ProcessStarLinking(StarBehaviour _star)  // Called by the stars themselves onMouseDown. 
     {
-        if (currentlySelectedStar == null)  //First Selected star.
+        if (currentlySelectedStar == null)  // First Selected star.
         {
             currentlySelectedStar = _star;
            
             return;
         }
-
-        // We don't want to deselect
-        //else if (currentlySelectedStar == _star) //We already have this one selected, deselect it.
-        //{
-        //    currentlySelectedStar = null;
-        //    return;                     //Since we're only deselecting, we don't want to attempt a link.
-        //}
 
         else //Else we need to link.
         {
@@ -85,33 +84,25 @@ public class StarManager : MonoBehaviour
     {
         if (currentlySelectedStar == null)
         {
-            selected = true;
             currentlySelectedStar = _star;
+            
+            selected = true;
             Debug.Log("Selected star: " + currentlySelectedStar);
             DrawLine(currentlySelectedStar, mousePos);
             return;
         }
 
-        else if (!_star.alreadyLinked)
-         {
+        else
+        {
             if (_star == currentlySelectedStar)
             {
                 selected = true;
                 DrawLine(currentlySelectedStar, mousePos);
                 return;
             }
-         }
-            else
-            {
-                if (_star == currentlySelectedStar)
-                {
-                selected = true;
-                DrawLine(currentlySelectedStar, mousePos);
-                return;
-            }
-                //return;
-            }
+            //return;
         }
+    }
 
 
     void AttemptLink(StarBehaviour _starOne, StarBehaviour _starTwo)
@@ -164,6 +155,11 @@ public class StarManager : MonoBehaviour
             else
             {
                 Debug.Log("Colliding with: " + vision.collider.tag);
+                currentlySelectedStar.earlyRelease = true;
+            }
+
+            if (_starTwo.alreadyLinked)
+            {
                 currentlySelectedStar.earlyRelease = true;
             }
         }
