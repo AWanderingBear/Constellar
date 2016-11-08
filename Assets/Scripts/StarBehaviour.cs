@@ -1,11 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StarBehaviour : MonoBehaviour
 {
+    private StarBehaviour selectedStar;
+    public StarBehaviour[] allStars;
+
     public GameObject StarObject;
+   
     public GameManager.StarType starType;
+
     public StarManager starLinkManager;  //Handle to the starlink manager.
+
+    private SpriteRend spriteRenderer;
+    public string scene;
     public bool alreadyLinked = false;
     public bool mouseHeld;
     public bool earlyRelease;
@@ -49,7 +58,10 @@ public class StarBehaviour : MonoBehaviour
                 case GameManager.StarType.Split:
                     Debug.Log("Clicked a Splitting Star");
                     //Debug.Log(alreadyLinked);
-                    //SplitBehaviour(this);
+                    break;
+                case GameManager.StarType.Goal:
+                    Debug.Log("Clicked a Goal Star");
+                    //Debug.Log(alreadyLinked);
                     break;
             }
         }
@@ -60,7 +72,8 @@ public class StarBehaviour : MonoBehaviour
     {
         starLinkManager.StartLineDrawing(this);
         earlyRelease = false;
-        
+        selectedStar = this;
+        Debug.Log("Scene index: " + scene);
     }
 
     // When mouse is being held, return true
@@ -78,45 +91,52 @@ public class StarBehaviour : MonoBehaviour
     // When mouse is released
     void OnMouseUp()
     {
-        // Turn mouse held boolean off
-        mouseHeld = false;
 
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // Turn mouse held boolean off
+            mouseHeld = false;
 
-        if (Physics.Raycast(ray, out hit))
-        {
-            StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
+            if (Physics.Raycast(ray, out hit) && selectedStar == starLinkManager.currentlySelectedStar)
             {
+                StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
+
+                if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
+                {
+                    starLinkManager.ProcessStarLinking(star);
+                    starLinkManager.firstSelected = true;
 
                 // if the star is a splitting star
-                if (star.starType == GameManager.StarType.Split)
+                if (star.starType == GameManager.StarType.Split && !earlyRelease)
                 {
                     SplitBehaviour(star);
                 }
-
-                starLinkManager.ProcessStarLinking(star);
-                starLinkManager.firstSelected = true;          
+                // if the star is a goal star
+                if (star.starType == GameManager.StarType.Goal && !earlyRelease)
+                {
+                    GoalBehaviour(star);
+                }
+                
             }
 
-            else if (star.alreadyLinked)
+                else if (star.alreadyLinked)
                 {
                     earlyRelease = true;
                 }
-        }
-        else
-        {    
-            earlyRelease = true;
-        }
+            }
+            else
+            {
+                earlyRelease = true;
+            }
 
-        if (downTime < 0.2f)
-        {
-            earlyRelease = true;
-        }
+            if (downTime < 0.2f)
+            {
+                earlyRelease = true;
+            }
 
-        // reset timer
-        downTime = 0.0f;
+            // reset timer
+            downTime = 0.0f;
+        
     }
 
 
@@ -133,16 +153,38 @@ public class StarBehaviour : MonoBehaviour
     {
         if (!currentStar.alreadySplit)
         {
-            GameObject CloneOne = Instantiate(StarObject, currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
-            GameObject CloneTwo = Instantiate(StarObject, currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
-            GameObject CloneThree = Instantiate(StarObject, currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+            GameObject CloneOne = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
+            GameObject CloneTwo = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
+            GameObject CloneThree = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
 
             CloneOne.transform.parent = currentStar.transform;
             CloneTwo.transform.parent = currentStar.transform;
             CloneThree.transform.parent = currentStar.transform;
 
+
             currentStar.alreadySplit = true;
-            
+
+            currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
+        }
+    }
+
+    void GoalBehaviour(StarBehaviour goalStar)
+    {
+        int starlist = 0;
+        allStars = FindObjectsOfType<StarBehaviour>();
+
+        foreach (StarBehaviour stars in allStars)
+        {
+            if (stars.alreadyLinked)
+            {
+                starlist += 1;
+            }
+        }
+        Scene scene = SceneManager.GetActiveScene();
+
+        if (starlist == allStars.Length || scene.name == "Main Menu")
+        {
+             goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);            
         }
     }
 }

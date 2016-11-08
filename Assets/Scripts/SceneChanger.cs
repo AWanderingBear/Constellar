@@ -13,8 +13,30 @@ public class SceneChanger : MonoBehaviour {
 
     public void SceneLoad(string SceneName)
     {
-        Fading();
-        SceneManager.LoadScene(SceneName);
+        if (SceneName == "Exit")
+        {
+            Application.Quit();
+        }
+
+        else if (SceneName == "Level Five")
+        {
+            GameManager.tempEnergy = 10;
+            Fading();
+            SceneManager.LoadScene(SceneName);
+        }
+        else
+        {
+            GameManager.tempEnergy = 100;
+            Fading();
+            SceneManager.LoadScene(SceneName);
+        }
+    }
+
+    public void restartScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+        GameManager.tempEnergy = 100;
     }
 
     public void QuitGame()

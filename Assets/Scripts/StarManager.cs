@@ -6,8 +6,8 @@ public class StarManager : MonoBehaviour
 
     public StarBehaviour currentlySelectedStar;         //Gets chosen through starlink script after a star is clicked.
     public GameObject connectingLinePrefab;     //The connecting line. Sprite can be turned on or off.
-    public GameObject LinkHolder;   //An empty defaut Gameobject to keep our heirarchy clean.
-    private GameObject tempConnection;
+    public GameObject LinkHolder;   //An empty default Gameobject to keep our heirarchy clean.
+    private GameObject tempConnection; // our line that is constantly drawing on mouse hold
 
     private LineRenderer line;
     private float rayLength = 100.0f;   //Way too long.
@@ -24,10 +24,10 @@ public class StarManager : MonoBehaviour
     {
         if (selected)
         {
+            // keep drawing and updating the line position if mouse if being held
             if (currentlySelectedStar.mouseHeld == true)
             {
                 UpdateLine(currentlySelectedStar, mousePos);
-                //Debug.Log("Updating");
             }
 
             // on early mouse release
@@ -87,20 +87,21 @@ public class StarManager : MonoBehaviour
             currentlySelectedStar = _star;
             
             selected = true;
-            Debug.Log("Selected star: " + currentlySelectedStar);
+            //Debug.Log("Selected star: " + currentlySelectedStar);
+            DrawLine(currentlySelectedStar, mousePos);
+            return;
+        }
+
+        else if (_star == currentlySelectedStar)
+        {
+            selected = true;
             DrawLine(currentlySelectedStar, mousePos);
             return;
         }
 
         else
         {
-            if (_star == currentlySelectedStar)
-            {
-                selected = true;
-                DrawLine(currentlySelectedStar, mousePos);
-                return;
-            }
-            //return;
+           return;
         }
     }
 
@@ -121,29 +122,31 @@ public class StarManager : MonoBehaviour
 
             if (vision.collider.tag == "Star")
             {
-                Debug.Log("Colliding with: " + vision.collider.tag);
+                Debug.Log("Detected collision with: " + vision.collider.tag);
                 drawRay = true;
                 //Debug.Log("hit");
                 LinkStars(_starOne, _starTwo);
                 _starOne.alreadyLinked = true;
                 _starTwo.alreadyLinked = true;
+                // Energy cost to link to star
                 GameManager.tempEnergy -= 10;
             }
             else if (vision.collider.tag == "Planet")
             {
-                Debug.Log("Colliding with: " + vision.collider.tag);
+                Debug.Log("Detected collision with: " + vision.collider.tag);
                 drawRay = true;
                 //Debug.Log("hit");
                 LinkStars(_starOne, _starTwo);
                 _starOne.alreadyLinked = true;
                 _starTwo.alreadyLinked = true;
-                GameManager.tempEnergy += 15;
+                // Energy gained linking to a planet
+                GameManager.tempEnergy += 20;
             }
 
             // ignore collision if the star is a no collision star type
             else if (vision.collider.tag == "Line" && currentlySelectedStar.starType == GameManager.StarType.NoCol)
             {
-                Debug.Log("Colliding with: " + vision.collider.tag);
+                Debug.Log("Detected collision with: " + vision.collider.tag);
                 drawRay = true;
                 //Debug.Log("hit");
                 LinkStars(_starOne, _starTwo);
@@ -154,7 +157,7 @@ public class StarManager : MonoBehaviour
 
             else
             {
-                Debug.Log("Colliding with: " + vision.collider.tag);
+                Debug.Log("Detected collision with: " + vision.collider.tag);
                 currentlySelectedStar.earlyRelease = true;
             }
 
@@ -242,7 +245,7 @@ public class StarManager : MonoBehaviour
         tempConnection.transform.parent = LinkHolder.transform;
 
         //Set Scale
-        tempConnection.transform.localScale = new Vector3(connectionLength, 0.05f, 1.0f);
+        tempConnection.transform.localScale = new Vector3(connectionLength, 0.05f, 0);
 
         //Create the Line Renderer
         line = tempConnection.AddComponent<LineRenderer>();
@@ -258,7 +261,7 @@ public class StarManager : MonoBehaviour
         // Update the line renderer
         line.useWorldSpace = true;
         line.SetPosition(0, _starOne.transform.position);
-        Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 0);
+        Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 1.0f);
         line.SetPosition(1, tempPos);
     }
 
