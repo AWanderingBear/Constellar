@@ -38,9 +38,4 @@ public class SceneChanger : MonoBehaviour {
         SceneManager.LoadScene(scene.name);
         GameManager.tempEnergy = 100;
     }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }

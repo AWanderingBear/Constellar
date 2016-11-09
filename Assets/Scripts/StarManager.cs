@@ -209,8 +209,10 @@ public class StarManager : MonoBehaviour
         line.SetVertexCount(2);
         line.SetWidth(0.05f, 0.05f);
         line.useWorldSpace = true;
-        line.SetPosition(0, _starOne.transform.position);
-        line.SetPosition(1, _starTwo.transform.position);
+        //line.SetPosition(0, _starOne.transform.position);
+        //line.SetPosition(1, _starTwo.transform.position);
+        line.SetPosition(0, new Vector3(_starOne.transform.position.x, _starOne.transform.position.y, 1.0f));
+        line.SetPosition(1, new Vector3(_starTwo.transform.position.x, _starTwo.transform.position.y, 1.0f));
 
         Destroy(tempConnection);
     }

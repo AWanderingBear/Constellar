@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StarBehaviour : MonoBehaviour
 {
+    // Star variables
     private StarBehaviour selectedStar;
     public StarBehaviour[] allStars;
-
     public GameObject StarObject;
-   
     public GameManager.StarType starType;
 
     public StarManager starLinkManager;  //Handle to the starlink manager.
 
-    private SpriteRend spriteRenderer;
+    public SoundManager soundManager;
+
+    private Text restartText;
     public string scene;
     public bool alreadyLinked = false;
     public bool mouseHeld;
@@ -27,6 +29,9 @@ public class StarBehaviour : MonoBehaviour
     void Start()
     {
         starLinkManager = GetComponentInParent<StarManager>();
+        soundManager = GameObject.Find("Audio Manager").GetComponent<SoundManager>();
+
+        restartText = GameObject.Find("RestartText").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -73,7 +78,6 @@ public class StarBehaviour : MonoBehaviour
         starLinkManager.StartLineDrawing(this);
         earlyRelease = false;
         selectedStar = this;
-        Debug.Log("Scene index: " + scene);
     }
 
     // When mouse is being held, return true
@@ -105,6 +109,8 @@ public class StarBehaviour : MonoBehaviour
                 {
                     starLinkManager.ProcessStarLinking(star);
                     starLinkManager.firstSelected = true;
+
+                soundManager.PlayStar();
 
                 // if the star is a splitting star
                 if (star.starType == GameManager.StarType.Split && !earlyRelease)
@@ -182,9 +188,14 @@ public class StarBehaviour : MonoBehaviour
         }
         Scene scene = SceneManager.GetActiveScene();
 
-        if (starlist == allStars.Length || scene.name == "Main Menu")
+        // change scenes if all the stars are connected or if the goal is either from the main menu or end scene
+        if (starlist == allStars.Length || scene.name == "Main Menu" || scene.name == "End Game")
         {
              goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);            
+        }
+        else
+        {
+            restartText.enabled = true;
         }
     }
 }
