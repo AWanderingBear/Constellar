@@ -10,6 +10,7 @@ public class StarBehaviour : MonoBehaviour
     public StarBehaviour[] allStars;
     public GameObject StarObject;
     public GameManager.StarType starType;
+    public LevelManager levelManager;
 
     public StarManager starLinkManager;  //Handle to the starlink manager.
 
@@ -30,6 +31,7 @@ public class StarBehaviour : MonoBehaviour
     {
         starLinkManager = GetComponentInParent<StarManager>();
         soundManager = GameObject.Find("Audio Manager").GetComponent<SoundManager>();
+        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
 
         restartText = GameObject.Find("RestartText").GetComponent<Text>();
     }
@@ -189,9 +191,20 @@ public class StarBehaviour : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
 
         // change scenes if all the stars are connected or if the goal is either from the main menu or end scene
-        if (starlist == allStars.Length || scene.name == "Main Menu" || scene.name == "End Game")
+        if (scene.name == "Main Menu" || scene.name == "End Game")
         {
              goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);            
+        }
+        else if (starlist == allStars.Length)
+        {
+            levelManager.tickLevelCompletion();
+            goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);
+            
+            // debug log for checking level completion boolean values
+            for (int i = 1; i < levelManager.numScenes; i++)
+            {
+                Debug.Log("Levels completed: Level " + i + " " + levelManager.levelComplete[i]);
+            }
         }
         else
         {

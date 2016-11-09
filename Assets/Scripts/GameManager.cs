@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
     public static int tempEnergy = 100;
     public Text energyText;
+
+   
     // Different types of stars
     public enum StarType
     {
@@ -19,6 +22,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         energyText.text = "Current Energy: " + tempEnergy;
+       
 	}
 	
 	// Update is called once per frame
@@ -30,5 +34,6 @@ public class GameManager : MonoBehaviour {
             gameObject.GetComponent<SceneChanger>().restartScene();
         }
     }
-  
+
+    
 }
