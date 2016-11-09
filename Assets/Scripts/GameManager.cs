@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    public static int tempEnergy;
+    public static int tempEnergy = 100;
     public Text energyText;
     // Different types of stars
     public enum StarType
@@ -12,12 +12,12 @@ public class GameManager : MonoBehaviour {
         Normal,
         Aura,
         NoCol,
-        Split
+        Split,
+        Goal
     };
 
     // Use this for initialization
     void Start () {
-        tempEnergy = 100;
         energyText.text = "Current Energy: " + tempEnergy;
 	}
 	
@@ -25,5 +25,10 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         energyText.text = "Current Energy: " + tempEnergy;
         
+        if (Input.GetKeyDown("r"))
+        {
+            gameObject.GetComponent<SceneChanger>().restartScene();
+        }
     }
+  
 }

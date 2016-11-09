@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8ce304c3af4628e4f8b06a6b24dd1c88
+timeCreated: 1478557889
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: KG Life is Messy
+  fontNames:
+  - KG Life is Messy
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,18 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StarBehaviour : MonoBehaviour
 {
+    // Star variables
+    private StarBehaviour selectedStar;
+    public StarBehaviour[] allStars;
     public GameObject StarObject;
     public GameManager.StarType starType;
-    public StarManager starLinkManager; //Handle to the starlink manager.
+
+    public StarManager starLinkManager;  //Handle to the starlink manager.
+
+    public SoundManager soundManager;
+
+    private Text restartText;
+    public string scene;
     public bool alreadyLinked = false;
-    private bool alreadySplit = false;
+    public bool mouseHeld;
+    public bool earlyRelease;
+    private bool alreadySplit;
+    private float downTime;
+    Ray ray;
+    RaycastHit hit;
 
     // Use this for initialization
     void Start()
     {
         starLinkManager = GetComponentInParent<StarManager>();
+        soundManager = GameObject.Find("Audio Manager").GetComponent<SoundManager>();
+
+        restartText = GameObject.Find("RestartText").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -29,20 +48,25 @@ public class StarBehaviour : MonoBehaviour
             switch (starType)
             {
                 case GameManager.StarType.Normal:
-                    Debug.Log("Normal Star");
-                    BasicBehaviour();
+                    Debug.Log("Clicked a Normal Star");
+                    //Debug.Log(alreadyLinked);
                     break;
                 case GameManager.StarType.NoCol:
-                    Debug.Log("No Collision Star");
-                    NoCollisionBehaviour();
+                    Debug.Log("Clicked a No Collision Star");
+                    //Debug.Log(alreadyLinked);
                     break;
                 case GameManager.StarType.Aura:
-                    Debug.Log("Aura Star");
+                    Debug.Log("Clicked a Aura Star");
+                    //Debug.Log(alreadyLinked);
                     AuraBehaviour();
                     break;
                 case GameManager.StarType.Split:
-                    Debug.Log("Splitting Star");
-                    SplitBehaviour(this);
+                    Debug.Log("Clicked a Splitting Star");
+                    //Debug.Log(alreadyLinked);
+                    break;
+                case GameManager.StarType.Goal:
+                    Debug.Log("Clicked a Goal Star");
+                    //Debug.Log(alreadyLinked);
                     break;
             }
         }
@@ -51,20 +75,76 @@ public class StarBehaviour : MonoBehaviour
     // Processes star linking when mouse is down
     void OnMouseDown()
     {
-        starLinkManager.ProcessStarLinking(this);
-        if (starLinkManager.drawing == true)
-        {
-            Debug.Log("Mouse clicked");
-            starLinkManager.AttemptLink(starLinkManager.currentlySelectedStar, this);
-        }
-        starLinkManager.drawing = true;
+        starLinkManager.StartLineDrawing(this);
+        earlyRelease = false;
+        selectedStar = this;
     }
 
-    // Basic star behaviour
-    void BasicBehaviour()
+    // When mouse is being held, return true
+    void OnMouseDrag()
+    {
+        mouseHeld = true;
+        downTime += Time.deltaTime;
+
+        if (downTime > 0.2f)
+        {
+            starLinkManager.drawing = true; 
+        }
+    }
+
+    // When mouse is released
+    void OnMouseUp()
     {
 
+            // Turn mouse held boolean off
+            mouseHeld = false;
+
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit) && selectedStar == starLinkManager.currentlySelectedStar)
+            {
+                StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
+
+                if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
+                {
+                    starLinkManager.ProcessStarLinking(star);
+                    starLinkManager.firstSelected = true;
+
+                soundManager.PlayStar();
+
+                // if the star is a splitting star
+                if (star.starType == GameManager.StarType.Split && !earlyRelease)
+                {
+                    SplitBehaviour(star);
+                }
+                // if the star is a goal star
+                if (star.starType == GameManager.StarType.Goal && !earlyRelease)
+                {
+                    GoalBehaviour(star);
+                }
+                
+            }
+
+                else if (star.alreadyLinked)
+                {
+                    earlyRelease = true;
+                }
+            }
+            else
+            {
+                earlyRelease = true;
+            }
+
+            if (downTime < 0.2f)
+            {
+                earlyRelease = true;
+            }
+
+            // reset timer
+            downTime = 0.0f;
+        
     }
+
 
     // Star mechanic 1
     // A star with an aura that drives away darkness and inside which jumping costs nothing
@@ -79,28 +159,44 @@ public class StarBehaviour : MonoBehaviour
     {
         if (!currentStar.alreadySplit)
         {
-            GameObject CloneOne = Instantiate(StarObject, gameObject.transform.GetChild(0).position, Quaternion.identity) as GameObject;
-            GameObject CloneTwo = Instantiate(StarObject, gameObject.transform.GetChild(1).position, Quaternion.identity) as GameObject;
-            GameObject CloneThree = Instantiate(StarObject, gameObject.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+            GameObject CloneOne = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
+            GameObject CloneTwo = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
+            GameObject CloneThree = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
 
-            CloneOne.transform.parent = gameObject.transform;
-            CloneTwo.transform.parent = gameObject.transform;
-            CloneThree.transform.parent = gameObject.transform;
+            CloneOne.transform.parent = currentStar.transform;
+            CloneTwo.transform.parent = currentStar.transform;
+            CloneThree.transform.parent = currentStar.transform;
+
 
             currentStar.alreadySplit = true;
-            
+
+            currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
         }
     }
 
-    // Star mechanic 3
-    // A star that allows players to not collide with lines when jumping off of it
-    // Ignore line colliders (Amberoni)
-    void NoCollisionBehaviour()
+    void GoalBehaviour(StarBehaviour goalStar)
     {
+        int starlist = 0;
+        allStars = FindObjectsOfType<StarBehaviour>();
 
+        foreach (StarBehaviour stars in allStars)
+        {
+            if (stars.alreadyLinked)
+            {
+                starlist += 1;
+            }
+        }
+        Scene scene = SceneManager.GetActiveScene();
+
+        // change scenes if all the stars are connected or if the goal is either from the main menu or end scene
+        if (starlist == allStars.Length || scene.name == "Main Menu" || scene.name == "End Game")
+        {
+             goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);            
+        }
+        else
+        {
+            restartText.enabled = true;
+        }
     }
-
-    // Particle effects (future)
-
 }
  
