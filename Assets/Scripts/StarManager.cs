@@ -206,8 +206,9 @@ public class StarManager : MonoBehaviour
 
         //Create the Line Renderer
         line = lineConnection.AddComponent<LineRenderer>();
-        line.SetVertexCount(2);
-        line.SetWidth(0.05f, 0.05f);
+        line.numPositions= 2;
+        line.startWidth = 0.05f;
+        line.endWidth = 0.05f;
         line.useWorldSpace = true;
         //line.SetPosition(0, _starOne.transform.position);
         //line.SetPosition(1, _starTwo.transform.position);
@@ -251,8 +252,9 @@ public class StarManager : MonoBehaviour
 
         //Create the Line Renderer
         line = tempConnection.AddComponent<LineRenderer>();
-        line.SetVertexCount(2);
-        line.SetWidth(0.05f, 0.05f);
+        line.numPositions = 2;
+        line.startWidth = 0.05f;
+        line.endWidth = 0.05f;
         line.useWorldSpace = true;
         line.SetPosition(0, _starOne.transform.position);
         line.SetPosition(1, mousePos);

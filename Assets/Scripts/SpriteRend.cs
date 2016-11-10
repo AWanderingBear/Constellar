@@ -7,11 +7,11 @@ public class SpriteRend : MonoBehaviour {
 
     public Sprite borderStar;
     public Sprite basicStar;
-    private SpriteRenderer spriteRenderer;
+    //private SpriteRenderer spriteRenderer;
 
     // Use this for initialization
     void Start () {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
