@@ -6,11 +6,9 @@ public class SettingsButton : MonoBehaviour {
 
 
     bool Zoomed = false;
-    private SpriteRenderer Renderer;
     // Use this for initialization
     void Start () {
 
-        Renderer = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
