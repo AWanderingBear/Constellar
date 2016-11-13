@@ -90,7 +90,7 @@ public class StarBehaviour : MonoBehaviour
 
         if (downTime > 0.2f)
         {
-            starLinkManager.drawing = true; 
+            starLinkManager.drawing = true;
         }
     }
 
@@ -98,19 +98,19 @@ public class StarBehaviour : MonoBehaviour
     void OnMouseUp()
     {
 
-            // Turn mouse held boolean off
-            mouseHeld = false;
+        // Turn mouse held boolean off
+        mouseHeld = false;
 
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit) && selectedStar == starLinkManager.currentlySelectedStar)
+        if (Physics.Raycast(ray, out hit) && selectedStar == starLinkManager.currentlySelectedStar)
+        {
+            StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
+
+            if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
             {
-                StarBehaviour star = hit.collider.gameObject.GetComponent<StarBehaviour>();
-
-                if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
-                {
-                    starLinkManager.ProcessStarLinking(star);
-                    starLinkManager.firstSelected = true;
+                starLinkManager.ProcessStarLinking(star);
+                starLinkManager.firstSelected = true;
 
                 soundManager.PlayStar();
 
@@ -124,27 +124,27 @@ public class StarBehaviour : MonoBehaviour
                 {
                     GoalBehaviour(star);
                 }
-                
+
             }
 
-                else if (star.alreadyLinked)
-                {
-                    earlyRelease = true;
-                }
-            }
-            else
+            else if (star.alreadyLinked)
             {
                 earlyRelease = true;
             }
+        }
+        else
+        {
+            earlyRelease = true;
+        }
 
-            if (downTime < 0.2f)
-            {
-                earlyRelease = true;
-            }
+        if (downTime < 0.2f)
+        {
+            earlyRelease = true;
+        }
 
-            // reset timer
-            downTime = 0.0f;
-        
+        // reset timer
+        downTime = 0.0f;
+
     }
 
 
@@ -193,13 +193,13 @@ public class StarBehaviour : MonoBehaviour
         // change scenes if all the stars are connected or if the goal is either from the main menu or end scene
         if (scene.name == "Main Menu" || scene.name == "End Game")
         {
-             goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);            
+            goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);
         }
         else if (starlist == allStars.Length)
         {
             levelManager.tickLevelCompletion();
             goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);
-            
+
             // debug log for checking level completion boolean values
             for (int i = 1; i < levelManager.numScenes; i++)
             {
@@ -212,4 +212,3 @@ public class StarBehaviour : MonoBehaviour
         }
     }
 }
- 

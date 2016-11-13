@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class DarkController : MonoBehaviour {
 
-    public ParticleSystem[] DarkGenerators;
+    ParticleSystem[] DarkGenerators;
 
     float CurrentTime = 0;
-    float LevelTime = 100;
+
+    public float LevelTime = 100;
+    public float MaxParticleLife = 5;
+    public float StartParticleLife = 1;
+
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +31,7 @@ public class DarkController : MonoBehaviour {
 
         CurrentTime += Time.deltaTime;
 
-        float DarknessTime = 1 + (4 * CurrentTime / LevelTime);
+        float DarknessTime = StartParticleLife + (MaxParticleLife * CurrentTime / LevelTime);
 
         foreach (ParticleSystem Darkness in DarkGenerators)
         {
