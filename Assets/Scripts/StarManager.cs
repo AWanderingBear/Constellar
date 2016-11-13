@@ -6,11 +6,13 @@ public class StarManager : MonoBehaviour
 
     public StarBehaviour currentlySelectedStar;         //Gets chosen through starlink script after a star is clicked.
     public GameObject connectingLinePrefab;     //The connecting line. Sprite can be turned on or off.
+    public GameObject updatingLinePrefab;
     public GameObject LinkHolder;   //An empty default Gameobject to keep our heirarchy clean.
     private GameObject tempConnection; // our line that is constantly drawing on mouse hold
 
     private LineRenderer line;
     private float rayLength = 100.0f;   //Way too long.
+    private float updatingRay;
     private RaycastHit vision;
 
     public Vector3 mousePos;
@@ -243,7 +245,7 @@ public class StarManager : MonoBehaviour
 
 
         //Create the Game Object
-       tempConnection = (GameObject)Instantiate(connectingLinePrefab, newLinePosition, rotationQuat);
+       tempConnection = (GameObject)Instantiate(updatingLinePrefab, newLinePosition, rotationQuat);
         tempConnection.transform.parent = LinkHolder.transform;
 
         //Set Scale
@@ -260,11 +262,50 @@ public class StarManager : MonoBehaviour
 
     public void UpdateLine(StarBehaviour _starOne, Vector3 mousePos)
     {
-        // Update the line renderer
-        line.useWorldSpace = true;
-        line.SetPosition(0, _starOne.transform.position);
-        Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 1.0f);
-        line.SetPosition(1, tempPos);
+
+        //if raycast returns the star.
+        Vector3 raycastDirection;
+        raycastDirection = new Vector3(mousePos.x - _starOne.transform.position.x,
+                                      mousePos.y - _starOne.transform.position.y, 0.0f);
+        Vector3 firstStarPosition = new Vector3(_starOne.transform.position.x, _starOne.transform.position.y, 0.0f);
+        updatingRay = Vector3.Distance(mousePos, firstStarPosition);
+
+        Ray attemptedRay = new Ray(firstStarPosition, raycastDirection);
+
+        Debug.DrawRay(_starOne.transform.position, raycastDirection * updatingRay, Color.red, 0.5f);
+        int layer_mask = LayerMask.GetMask("Collider");
+
+        if (Physics.Raycast(attemptedRay, out vision, updatingRay / 1.75f, layer_mask))
+        {
+            // ignore collision if the star is a no collision star type
+            if (vision.collider.tag == "Line" && currentlySelectedStar.starType != GameManager.StarType.NoCol)
+            {
+                // Update the line renderer
+                line.useWorldSpace = true;
+                line.SetPosition(0, _starOne.transform.position);
+                Vector3 tempPos = new Vector3(vision.point.x, vision.point.y, 1.0f);
+                line.SetPosition(1, tempPos);
+            }
+
+            else
+            {
+                // Update the line renderer
+                line.useWorldSpace = true;
+                line.SetPosition(0, _starOne.transform.position);
+                Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 1.0f);
+                line.SetPosition(1, tempPos);
+            }
+
+        }
+        else
+        {
+            // Update the line renderer
+            line.useWorldSpace = true;
+            line.SetPosition(0, _starOne.transform.position);
+            Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 1.0f);
+            line.SetPosition(1, tempPos);
+        }
+
     }
 
 
