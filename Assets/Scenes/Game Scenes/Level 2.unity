@@ -354,7 +354,7 @@ Prefab:
     - target: {fileID: 114443136198214432, guid: e4d4fac72d4e9514ba3741ec117a729a,
         type: 2}
       propertyPath: scene
-      value: Level 2
+      value: Level 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4d4fac72d4e9514ba3741ec117a729a, type: 2}
@@ -398,6 +398,9 @@ MonoBehaviour:
     type: 2}
   LinkHolder: {fileID: 1597076952}
   mousePos: {x: 0, y: 0, z: 0}
+  connectionLength: 0
+  totalLength: 0
+  totalLevelEnergyPercentageUsed: 0
   firstSelected: 0
   drawing: 0
 --- !u!4 &1102695672

@@ -207,7 +207,7 @@ public class StarBehaviour : MonoBehaviour
         }
         else if (starlist == allStars.Length)
         {
-            levelManager.tickLevelCompletion();
+            //levelManager.tickLevelCompletion();
             goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);
 
             // debug log for checking level completion boolean values

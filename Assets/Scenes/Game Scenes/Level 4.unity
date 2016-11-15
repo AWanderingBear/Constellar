@@ -219,8 +219,55 @@ Prefab:
       propertyPath: m_Name
       value: Aura Star (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 58596087760032656, guid: fc4b5756d4545bd48a131e02ab6c28bf,
+        type: 2}
+      propertyPath: m_Radius
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &899472867
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4258513261882718, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258513261882718, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10.823599
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258513261882718, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258513261882718, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258513261882718, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258513261882718, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258513261882718, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258513261882718, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a9f374461e40fbd4d8f9efd2ba0f5f03, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &903866331
 GameObject:
@@ -390,6 +437,9 @@ MonoBehaviour:
     type: 2}
   LinkHolder: {fileID: 1597076952}
   mousePos: {x: 0, y: 0, z: 0}
+  connectionLength: 0
+  totalLength: 0
+  totalLevelEnergyPercentageUsed: 0
   firstSelected: 0
   drawing: 0
 --- !u!4 &1102695672
@@ -410,7 +460,7 @@ Transform:
   - {fileID: 122494942}
   - {fileID: 105567007}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1116855038 stripped
 Transform:
@@ -490,7 +540,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1635675266
 Prefab:
@@ -501,7 +551,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000010094295394, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.013160706
+      value: 2.15
       objectReference: {fileID: 0}
     - target: {fileID: 4000010094295394, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}
       propertyPath: m_LocalPosition.y
@@ -530,6 +580,16 @@ Prefab:
     - target: {fileID: 4000010094295394, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 58596087760032656, guid: fc4b5756d4545bd48a131e02ab6c28bf,
+        type: 2}
+      propertyPath: m_Radius
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 122000012000095820, guid: fc4b5756d4545bd48a131e02ab6c28bf,
+        type: 2}
+      propertyPath: m_Size
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}
@@ -596,7 +656,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1841316784
 Prefab:
@@ -607,7 +667,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000010094295394, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8.46684
+      value: 6.48
       objectReference: {fileID: 0}
     - target: {fileID: 4000010094295394, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}
       propertyPath: m_LocalPosition.y
@@ -640,6 +700,11 @@ Prefab:
     - target: {fileID: 1000012317882116, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}
       propertyPath: m_Name
       value: Aura Star (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 58596087760032656, guid: fc4b5756d4545bd48a131e02ab6c28bf,
+        type: 2}
+      propertyPath: m_Radius
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc4b5756d4545bd48a131e02ab6c28bf, type: 2}

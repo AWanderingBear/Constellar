@@ -63,10 +63,10 @@ public class LevelSelectManager : MonoBehaviour
     public void GoToLevel(int ConstellationID)
     {
 
-        if (CurrentLevel > ConstellationID * 3 && CurrentLevel <= ConstellationID * 4)
+        if (CurrentLevel > (ConstellationID - 1) * 3 && CurrentLevel <= ConstellationID * 4)
         {
 
-            SceneManager.GetSceneAt(CurrentLevel);
+            SceneManager.LoadScene(CurrentLevel);
         }
         else if (CurrentLevel > ConstellationID * 3)
         {
