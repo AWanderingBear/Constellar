@@ -112,7 +112,10 @@ public class StarBehaviour : MonoBehaviour
                 starLinkManager.ProcessStarLinking(star);
                 starLinkManager.firstSelected = true;
 
-                soundManager.PlayStar();
+                if (soundManager != null)
+                {
+                    soundManager.PlayStar();
+                }
 
                 // if the star is a splitting star
                 if (star.starType == GameManager.StarType.Split && !earlyRelease)
