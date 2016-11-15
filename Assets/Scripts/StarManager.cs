@@ -16,6 +16,9 @@ public class StarManager : MonoBehaviour
     private RaycastHit vision;
 
     public Vector3 mousePos;
+    public float connectionLength;
+    public float totalLength;
+    public float totalLevelEnergyPercentageUsed;    //Needs to be between 0 and 100, this is used directly by the bar.
 
     private bool drawRay;
     public bool firstSelected;
@@ -131,7 +134,7 @@ public class StarManager : MonoBehaviour
                 _starOne.alreadyLinked = true;
                 _starTwo.alreadyLinked = true;
                 // Energy cost to link to star
-                GameManager.tempEnergy -= 10;
+                GameManager.tempEnergy -= (int)(4 * connectionLength);
             }
             else if (vision.collider.tag == "Planet")
             {
@@ -185,6 +188,7 @@ public class StarManager : MonoBehaviour
         //The rest of the math relies on these both being positive.
         differenceX = Mathf.Abs(differenceX);
         differenceY = Mathf.Abs(differenceY);
+    
 
         //Creating the final rotation Vec
         Quaternion rotationQuat = Quaternion.Euler(0.0f, 0.0f, angleZ);
@@ -195,7 +199,9 @@ public class StarManager : MonoBehaviour
         Vector3 newLinePosition = new Vector3(minimumX + (differenceX / 2.0f), minimumY + (differenceY / 2.0f), 0.0f);
 
         //Finding the scale
-        float connectionLength = Mathf.Sqrt((differenceX * differenceX) + differenceY * differenceY);
+        connectionLength = Mathf.Sqrt((differenceX * differenceX) + differenceY * differenceY);
+        totalLength += connectionLength;
+        Debug.Log("TotalLength = " + totalLength);
 
 
         //Create the Game Object
@@ -297,7 +303,6 @@ public class StarManager : MonoBehaviour
                 Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 1.0f);
                 line.SetPosition(1, tempPos);
             }
-
         }
         else
         {
@@ -307,9 +312,5 @@ public class StarManager : MonoBehaviour
             Vector3 tempPos = new Vector3(mousePos.x, mousePos.y, 1.0f);
             line.SetPosition(1, tempPos);
         }
-
     }
-
-
-
 }
