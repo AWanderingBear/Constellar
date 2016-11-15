@@ -54,7 +54,7 @@ public class SoundManager : MonoBehaviour {
 
     public void PlayStar()
     {
-        int randomClick = Random.Range(0, 8);
+        int randomClick = Random.Range(0, starClicks.Length);
         AudioClip starClick = starClicks[randomClick];
         efxSource.PlayOneShot(starClick);
     }
