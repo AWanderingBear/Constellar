@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allStars: []
-  StarObject: {fileID: 1000011101963458, guid: 33dc695b111c1464798beb417c500f89, type: 2}
+  StarObject: {fileID: 1000011101963458, guid: e3e8c53c6ddd2314f83f808d1c32b2f9, type: 2}
   starType: 2
   levelManager: {fileID: 0}
   starLinkManager: {fileID: 0}

@@ -80,14 +80,14 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010965999542}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.5
+  m_Radius: 19
 --- !u!111 &111253067824659914
 Animation:
   m_ObjectHideFlags: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allStars: []
-  StarObject: {fileID: 1000011101963458, guid: 33dc695b111c1464798beb417c500f89, type: 2}
+  StarObject: {fileID: 1000011101963458, guid: e3e8c53c6ddd2314f83f808d1c32b2f9, type: 2}
   starType: 1
   levelManager: {fileID: 0}
   starLinkManager: {fileID: 0}
@@ -130,7 +130,7 @@ Halo:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010965999542}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Color:
     serializedVersion: 2
     rgba: 4283848278

@@ -129,7 +129,7 @@ public class StarManager : MonoBehaviour
             {
                 Debug.Log("Detected collision with: " + vision.collider.tag);
                 drawRay = true;
-                //Debug.Log("hit");
+               
                 LinkStars(_starOne, _starTwo);
                 _starOne.alreadyLinked = true;
                 _starTwo.alreadyLinked = true;

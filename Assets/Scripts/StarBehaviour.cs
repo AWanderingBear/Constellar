@@ -60,7 +60,6 @@ public class StarBehaviour : MonoBehaviour
                 case GameManager.StarType.Aura:
                     Debug.Log("Clicked a Aura Star");
                     //Debug.Log(alreadyLinked);
-                    AuraBehaviour();
                     break;
                 case GameManager.StarType.Split:
                     Debug.Log("Clicked a Splitting Star");
@@ -97,7 +96,6 @@ public class StarBehaviour : MonoBehaviour
     // When mouse is released
     void OnMouseUp()
     {
-
         // Turn mouse held boolean off
         mouseHeld = false;
 
@@ -109,6 +107,7 @@ public class StarBehaviour : MonoBehaviour
 
             if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
             {
+                Debug.Log("Released on");
                 starLinkManager.ProcessStarLinking(star);
                 starLinkManager.firstSelected = true;
 
@@ -126,6 +125,11 @@ public class StarBehaviour : MonoBehaviour
                 if (star.starType == GameManager.StarType.Goal && !earlyRelease)
                 {
                     GoalBehaviour(star);
+                }
+                // if the star is a aura star
+                if (star.starType == GameManager.StarType.Aura && !earlyRelease)
+                {
+                    AuraBehaviour(star);
                 }
 
             }
@@ -153,9 +157,12 @@ public class StarBehaviour : MonoBehaviour
 
     // Star mechanic 1
     // A star with an aura that drives away darkness and inside which jumping costs nothing
-    void AuraBehaviour()
+    void AuraBehaviour(StarBehaviour currentStar)
     {
-        // Go away darkness!
+        GameObject haloChild = currentStar.transform.GetChild(0).gameObject;
+        Component halo = haloChild.GetComponent("Halo");
+        currentStar.GetComponentInChildren<CircleCollider2D>().enabled = true;
+        halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
     }
 
     // Star mechanic 2
@@ -164,9 +171,9 @@ public class StarBehaviour : MonoBehaviour
     {
         if (!currentStar.alreadySplit)
         {
-            GameObject CloneOne = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
-            GameObject CloneTwo = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
-            GameObject CloneThree = Instantiate(Resources.Load("PinkStar"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+            GameObject CloneOne = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
+            GameObject CloneTwo = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
+            GameObject CloneThree = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
 
             CloneOne.transform.parent = currentStar.transform;
             CloneTwo.transform.parent = currentStar.transform;
