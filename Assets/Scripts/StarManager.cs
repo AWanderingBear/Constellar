@@ -3,12 +3,14 @@ using System.Collections;
 
 public class StarManager : MonoBehaviour
 {
-
     public StarBehaviour currentlySelectedStar;         //Gets chosen through starlink script after a star is clicked.
     public GameObject connectingLinePrefab;     //The connecting line. Sprite can be turned on or off.
     public GameObject updatingLinePrefab;
     public GameObject LinkHolder;   //An empty default Gameobject to keep our heirarchy clean.
     private GameObject tempConnection; // our line that is constantly drawing on mouse hold
+    public GameObject EnergyCanvasPrefab;
+    private GameObject EnergyCanvas;
+
 
     private LineRenderer line;
     private float rayLength = 100.0f;   //Way too long.
@@ -16,14 +18,25 @@ public class StarManager : MonoBehaviour
     private RaycastHit vision;
 
     public Vector3 mousePos;
-    public float connectionLength;
-    public float totalLength;
+    public float connectionLength;  //This is a debug variable.
+    public float totalLengthUsedThisLevel;       //Total length used
+    public float maxLengthForCurrentLevel;        
     public float totalLevelEnergyPercentageUsed;    //Needs to be between 0 and 100, this is used directly by the bar.
 
     private bool drawRay;
     public bool firstSelected;
     private bool selected;
     public bool drawing;
+
+    public int currentLevel;   //This shouldnt be hard coded. If this is left in remove it and fix the bottom func.
+
+    void Start()
+    {
+        EnergyCanvas = Instantiate(EnergyCanvasPrefab, Vector3.zero, Quaternion.identity);
+        EnergyCanvas.transform.parent = this.transform;
+        EnergyCanvas.GetComponentInChildren<EnergyBarResizer>().starManager = this;
+        totalLevelEnergyPercentageUsed = 100 - (totalLengthUsedThisLevel / GetCurrentLevelMaxEnergy() * 100);
+    }
 
     void Update()
     {
@@ -199,7 +212,8 @@ public class StarManager : MonoBehaviour
 
         //Finding the scale
         connectionLength = Mathf.Sqrt((differenceX * differenceX) + differenceY * differenceY);
-        totalLength += connectionLength;
+        totalLengthUsedThisLevel += connectionLength;
+        totalLevelEnergyPercentageUsed = 100 - (totalLengthUsedThisLevel / GetCurrentLevelMaxEnergy() * 100);
         //Debug.Log("TotalLength = " + totalLength); //See the total length
 
 
@@ -311,6 +325,40 @@ public class StarManager : MonoBehaviour
 
     }
 
-
+    private float GetCurrentLevelMaxEnergy()
+    {
+        //int currentLevel = PlayerPrefs.GetInt("level, 0");  //This line might be wrong.
+        currentLevel = 1;
+        if (currentLevel == 1)
+        {
+            return 27.9f;
+        }
+        else if (currentLevel == 2)
+        {
+            return 100.0f;
+        }
+        else if (currentLevel == 3)
+        {
+            return 59.85f;
+        }
+        else if (currentLevel == 4)
+        {
+            return 37.28f;
+        }
+        else if (currentLevel == 5)
+        {
+            return 100.0f;
+        }
+        else if (currentLevel == 6)
+        {
+            return 100.0f;
+        }
+        else if (currentLevel == 7)
+        {
+            return 100.0f;
+        }
+        Debug.Log("Getting current level isn't working. Fix this function please.");
+        return -1;
+    }
 
 }
