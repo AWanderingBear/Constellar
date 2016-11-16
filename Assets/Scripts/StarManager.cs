@@ -11,6 +11,10 @@ public class StarManager : MonoBehaviour
     public GameObject EnergyCanvasPrefab;
     private GameObject EnergyCanvas;
 
+    public Sprite regularStarG;
+    public Sprite auraStarG;
+    public Sprite voidStarG;
+    public Sprite splitStarG;
 
     private LineRenderer line;
     private float rayLength = 100.0f;   //Way too long.
@@ -249,6 +253,23 @@ public class StarManager : MonoBehaviour
         Destroy(tempConnection);
 
         numLinkedStars += 1;
+
+        switch (_starOne.starType)
+        {
+            case GameManager.StarType.Normal:
+                Debug.Log("Clicked a Normal Star");
+                //Debug.Log(alreadyLinked);
+                break;
+            case GameManager.StarType.NoCol:
+                _starOne.GetComponent<SpriteRenderer>().sprite = voidStarG;
+                break;
+            case GameManager.StarType.Aura:
+                _starOne.GetComponent<SpriteRenderer>().sprite = auraStarG;
+                break;
+            case GameManager.StarType.Split:
+                _starOne.GetComponent<SpriteRenderer>().sprite = splitStarG;
+                break;
+        }
     }
 
     void DrawLine(StarBehaviour _starOne, Vector3 mousePos)
