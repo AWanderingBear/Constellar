@@ -13,11 +13,17 @@ public class LevelManager : MonoBehaviour {
     public static LevelManager instance = null;
     public LevelSelectManager levelSelectManager;
 
+    public int numStarLinked;
+    public int playerScore;
+    public int timeElapsed;
+
     void Start()
     {
         numScenes = SceneManager.sceneCountInBuildSettings;
         levelComplete = new bool[numScenes];
-
+        int stars = PlayerPrefs.GetInt("Stars Linked");
+        float time = PlayerPrefs.GetFloat("Time Elapsed");
+        Debug.Log("Stars: " + stars + "  " + "Time passed: " + time);
     }
 
     // Use this for initialization

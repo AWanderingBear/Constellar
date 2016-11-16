@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static int tempEnergy = 100;
     public Text energyText;
 
+    public float timePassed;
    
     // Different types of stars
     public enum StarType
@@ -36,8 +37,10 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         energyText.text = "Current Energy: " + tempEnergy;
-        
+
+
         if (Input.GetKeyDown("r"))
         {
             gameObject.GetComponent<SceneChanger>().restartScene();
