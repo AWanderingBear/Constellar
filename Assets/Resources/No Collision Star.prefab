@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114900700807418580}
   - component: {fileID: 135998281707081664}
   m_Layer: 0
-  m_Name: No Collision Star 1
+  m_Name: No Collision Star
   m_TagString: Star
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allStars: []
-  StarObject: {fileID: 1000011101963458, guid: e3e8c53c6ddd2314f83f808d1c32b2f9, type: 2}
   starType: 2
   levelManager: {fileID: 0}
   starLinkManager: {fileID: 0}
