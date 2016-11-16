@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndLevelHomeButton : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class EndLevelHomeButton : MonoBehaviour
 
     void OnMouseDown()
     {
-
+        SceneManager.LoadScene(0);
     }
 
     void OnMouseOver()

@@ -12,6 +12,11 @@ public class LevelSelectManager : MonoBehaviour
     public GameObject Constellation4;
     public GameObject Constellation5;
     public GameObject Constellation6;
+    public GameObject Constellation7;
+    public GameObject Constellation8;
+    public GameObject Constellation9;
+    public GameObject Constellation10;
+
 
     private LevelManager levelManager;
     public int CurrentLevel;
@@ -30,30 +35,54 @@ public class LevelSelectManager : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        if (CurrentLevel > 3)
+        if (CurrentLevel >= 1)
         {
+            Constellation1.SetActive(true);
+        }
 
+        if (CurrentLevel >= 2)
+        {
             Constellation2.SetActive(true);
         }
-        else if (CurrentLevel > 6)
-        {
 
+        if (CurrentLevel >= 3)
+        {
             Constellation3.SetActive(true);
         }
-        else if (CurrentLevel > 9)
-        {
 
+        if (CurrentLevel >= 4)
+        {
             Constellation4.SetActive(true);
         }
-        else if (CurrentLevel > 12)
-        {
 
+        if (CurrentLevel >= 5)
+        {
             Constellation5.SetActive(true);
         }
-        else if (CurrentLevel > 15)
-        {
 
+        if (CurrentLevel >= 6)
+        {
             Constellation6.SetActive(true);
+        }
+
+        if (CurrentLevel >= 7)
+        {
+            Constellation7.SetActive(true);
+        }
+
+        if (CurrentLevel >= 8)
+        {
+            Constellation8.SetActive(true);
+        }
+
+        if (CurrentLevel >= 9)
+        {
+            Constellation9.SetActive(true);
+        }
+
+        if (CurrentLevel >= 10)
+        {
+            Constellation10.SetActive(true);
         }
     }
 
@@ -66,18 +95,7 @@ public class LevelSelectManager : MonoBehaviour
     public void GoToLevel(int ConstellationID)
     {
 
-        if (CurrentLevel > (ConstellationID - 1) * 3 && CurrentLevel <= ConstellationID * 4)
-        {
-            SceneManager.LoadScene(CurrentLevel);
-        }
-
-        else if (CurrentLevel > ConstellationID * 3)
-        {
-
-            //Level Repeat
-            //Set options
-            //Send Level change
-        }
+            SceneManager.LoadScene(ConstellationID);
     }
 
     public void retrieveCurrentLevel()

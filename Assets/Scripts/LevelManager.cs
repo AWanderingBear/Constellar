@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour {
             if (SceneManager.GetActiveScene().buildIndex == i)
             {
                 levelComplete[i] = true;
+                PlayerPrefs.SetInt("LastLevelComplete", i);
             }
         }
     }

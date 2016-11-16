@@ -87,7 +87,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 19
+  m_Radius: 25
 --- !u!111 &111253067824659914
 Animation:
   m_ObjectHideFlags: 1
@@ -114,9 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200744e9d9811dd4d9a29a23c07390a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allStars: []
-  StarObject: {fileID: 1000011101963458, guid: e3e8c53c6ddd2314f83f808d1c32b2f9, type: 2}
   starType: 1
+  splitType: 0
+  gameManager: {fileID: 0}
   levelManager: {fileID: 0}
   starLinkManager: {fileID: 0}
   soundManager: {fileID: 0}
@@ -145,7 +145,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212000010696187432
 SpriteRenderer:

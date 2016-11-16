@@ -6,11 +6,12 @@ public class ConstellationHover : MonoBehaviour {
 
     public GameObject Context;
     public int ConstellationID = 0;
-    public LevelSelectManager select;
+    private LevelSelectManager select;
 
 	// Use this for initialization
 	void Start () {
-		
+
+        select = GetComponentInParent<LevelSelectManager>();
 	}
 	
 	// Update is called once per frame

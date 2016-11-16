@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1816046468726570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.521448, y: -3.7965772, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 4949061835096434}
@@ -85,7 +85,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 12
 --- !u!114 &114900700807418580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200744e9d9811dd4d9a29a23c07390a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allStars: []
-  StarObject: {fileID: 1000011101963458, guid: e3e8c53c6ddd2314f83f808d1c32b2f9, type: 2}
   starType: 2
+  splitType: 0
+  gameManager: {fileID: 0}
   levelManager: {fileID: 0}
   starLinkManager: {fileID: 0}
   soundManager: {fileID: 0}
@@ -117,7 +117,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 1.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212346585540534430
 SpriteRenderer:

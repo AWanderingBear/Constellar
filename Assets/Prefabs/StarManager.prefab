@@ -86,6 +86,15 @@ MonoBehaviour:
   updatingLinePrefab: {fileID: 1000013425566322, guid: ca8e6f9b202fa984bb9d2dd14e4d14b1,
     type: 2}
   LinkHolder: {fileID: 1814325312767660}
+  EnergyCanvasPrefab: {fileID: 1259394063525558, guid: 3bd317d2022b63749a68b55bed0bc85e,
+    type: 2}
   mousePos: {x: 0, y: 0, z: 0}
+  connectionLength: 0
+  totalLengthUsedThisLevel: 0
+  maxLengthForCurrentLevel: 0
+  totalLevelEnergyPercentageUsed: 0
   firstSelected: 0
   drawing: 0
+  timeElapsed: 0
+  currentLevel: 0
+  numLinkedStars: 1
