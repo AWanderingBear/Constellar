@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
     public int numScenes;
 
     public static LevelManager instance = null;
-
+    public LevelSelectManager levelSelectManager;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Awake () {
+    void Awake() {
 
         numScenes = SceneManager.sceneCountInBuildSettings;
         levelComplete = new bool[numScenes];
@@ -39,15 +39,17 @@ public class LevelManager : MonoBehaviour {
         //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
     }
-	
+
     public void tickLevelCompletion()
     {
-        for (int i = 2; i <= numScenes; i++)
+        for (int i = 1; i <= numScenes; i++)
         {
             if (SceneManager.GetActiveScene().buildIndex == i)
             {
-                levelComplete[i - 1] = true;
+                levelComplete[i] = true;
             }
         }
     }
+
+
 }

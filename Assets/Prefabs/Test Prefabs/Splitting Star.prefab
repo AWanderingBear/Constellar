@@ -195,6 +195,9 @@ MonoBehaviour:
   alreadyLinked: 0
   mouseHeld: 0
   earlyRelease: 0
+  splitStar1: RegularStar
+  splitStar2: RegularStar
+  splitStar3: RegularStar
 --- !u!114 &114109540737207194
 MonoBehaviour:
   m_ObjectHideFlags: 1

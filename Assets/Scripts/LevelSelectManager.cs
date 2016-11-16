@@ -13,13 +13,16 @@ public class LevelSelectManager : MonoBehaviour
     public GameObject Constellation5;
     public GameObject Constellation6;
 
-    private int CurrentLevel;
+    private LevelManager levelManager;
+    public int CurrentLevel;
 
     // Use this for initialization
     void Start()
     {
 
         CurrentLevel = PlayerPrefs.GetInt("Level", 0);
+        retrieveCurrentLevel();
+        Debug.Log("Current level: " + CurrentLevel);
         if (CurrentLevel == 0)
         {
             PlayerPrefs.SetInt("Level", 1);
@@ -65,15 +68,29 @@ public class LevelSelectManager : MonoBehaviour
 
         if (CurrentLevel > (ConstellationID - 1) * 3 && CurrentLevel <= ConstellationID * 4)
         {
-
             SceneManager.LoadScene(CurrentLevel);
         }
+
         else if (CurrentLevel > ConstellationID * 3)
         {
 
             //Level Repeat
             //Set options
             //Send Level change
+        }
+    }
+
+    public void retrieveCurrentLevel()
+    {
+        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
+
+        for (int i = 0; i < levelManager.levelComplete.Length; i++)
+        {
+            if (levelManager.levelComplete[i] == true)
+            {
+                PlayerPrefs.SetInt("Level", i + 1);
+                CurrentLevel = i + 1;
+            }
         }
     }
 }

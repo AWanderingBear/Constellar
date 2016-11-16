@@ -124,6 +124,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1102695672}
     m_Modifications:
+    - target: {fileID: 114000010781167708, guid: 22e4f05a2886292438e3a600d58ee58e,
+        type: 2}
+      propertyPath: splitStars.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4000010431287400, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.36434847
@@ -175,6 +180,26 @@ Prefab:
     - target: {fileID: 4000012126862824, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalPosition.y
       value: -2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010781167708, guid: 22e4f05a2886292438e3a600d58ee58e,
+        type: 2}
+      propertyPath: splitStars.Array.data[0]
+      value: RegularStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010781167708, guid: 22e4f05a2886292438e3a600d58ee58e,
+        type: 2}
+      propertyPath: splitStars.Array.data[1]
+      value: RegularStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010781167708, guid: 22e4f05a2886292438e3a600d58ee58e,
+        type: 2}
+      propertyPath: splitStars.Array.data[2]
+      value: RegularStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010781167708, guid: 22e4f05a2886292438e3a600d58ee58e,
+        type: 2}
+      propertyPath: splitStar1
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
@@ -300,6 +325,9 @@ MonoBehaviour:
     type: 2}
   LinkHolder: {fileID: 1597076952}
   mousePos: {x: 0, y: 0, z: 0}
+  connectionLength: 0
+  totalLength: 0
+  totalLevelEnergyPercentageUsed: 0
   firstSelected: 0
   drawing: 0
 --- !u!4 &1102695672

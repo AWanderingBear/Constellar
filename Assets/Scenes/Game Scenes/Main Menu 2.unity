@@ -262,6 +262,7 @@ MonoBehaviour:
   Constellation4: {fileID: 1466382618}
   Constellation5: {fileID: 273235744}
   Constellation6: {fileID: 841508531}
+  CurrentLevel: 0
 --- !u!4 &186656471
 Transform:
   m_ObjectHideFlags: 0
@@ -1634,6 +1635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelComplete: 
   numScenes: 0
+  levelSelectManager: {fileID: 186656470}
 --- !u!4 &1116579859
 Transform:
   m_ObjectHideFlags: 0

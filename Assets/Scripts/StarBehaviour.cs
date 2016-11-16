@@ -18,10 +18,13 @@ public class StarBehaviour : MonoBehaviour
 
     private Text restartText;
     public string scene;
+
     public bool alreadyLinked = false;
     public bool mouseHeld;
     public bool earlyRelease;
+
     private bool alreadySplit;
+
     private float downTime;
     Ray ray;
     RaycastHit hit;
@@ -107,7 +110,6 @@ public class StarBehaviour : MonoBehaviour
 
             if ((hit.collider.tag == "Star" || hit.collider.tag == "Planet") && !star.alreadyLinked && starLinkManager.drawing)
             {
-                Debug.Log("Released on");
                 starLinkManager.ProcessStarLinking(star);
                 starLinkManager.firstSelected = true;
 
@@ -170,7 +172,7 @@ public class StarBehaviour : MonoBehaviour
     void SplitBehaviour(StarBehaviour currentStar)
     {
         if (!currentStar.alreadySplit)
-        {
+        { 
             GameObject CloneOne = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
             GameObject CloneTwo = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
             GameObject CloneThree = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
@@ -188,37 +190,18 @@ public class StarBehaviour : MonoBehaviour
 
     void GoalBehaviour(StarBehaviour goalStar)
     {
-        int starlist = 0;
-        allStars = FindObjectsOfType<StarBehaviour>();
-
-        foreach (StarBehaviour stars in allStars)
-        {
-            if (stars.alreadyLinked)
-            {
-                starlist += 1;
-            }
-        }
         Scene scene = SceneManager.GetActiveScene();
 
-        // change scenes if all the stars are connected or if the goal is either from the main menu or end scene
-        if (scene.name == "Main Menu" || scene.name == "End Game")
-        {
-            goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);
-        }
-        else if (starlist == allStars.Length)
-        {
-            //levelManager.tickLevelCompletion();
-            goalStar.GetComponent<SceneChanger>().SceneLoad(goalStar.scene);
+        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
+        levelManager.tickLevelCompletion();
+
+            goalStar.GetComponent<SceneChanger>().SceneLoad("End Level");
 
             // debug log for checking level completion boolean values
-            for (int i = 1; i < levelManager.numScenes; i++)
-            {
-                Debug.Log("Levels completed: Level " + i + " " + levelManager.levelComplete[i]);
-            }
-        }
-        else
-        {
-            restartText.enabled = true;
-        }
+            //for (int i = 1; i < levelManager.numScenes; i++)
+            //{
+            //    Debug.Log("Levels completed: Level " + i + " " + levelManager.levelComplete[i]);
+            //}
+    
     }
 }
