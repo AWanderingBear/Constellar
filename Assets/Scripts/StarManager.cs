@@ -328,6 +328,7 @@ public class StarManager : MonoBehaviour
     private float GetCurrentLevelMaxEnergy()
     {
         //int currentLevel = PlayerPrefs.GetInt("level, 0");  //This line might be wrong.
+        currentLevel = 1;
         if (currentLevel == 1)
         {
             return 27.9f;
@@ -358,7 +359,6 @@ public class StarManager : MonoBehaviour
         }
         Debug.Log("Getting current level isn't working. Fix this function please.");
         return -1;
-
     }
 
 }

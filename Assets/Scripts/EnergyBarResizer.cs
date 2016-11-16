@@ -14,7 +14,11 @@ public class EnergyBarResizer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        barPercentage = starManager.totalLevelEnergyPercentageUsed;
+        if (barPercentage != starManager.totalLevelEnergyPercentageUsed)
+        {
+            barPercentage = Mathf.Lerp(barPercentage, starManager.totalLevelEnergyPercentageUsed, 0.5f);
+        }
+        
         GetComponent<RectTransform>().sizeDelta = new Vector2(barPercentage/2, 36.7f);
 
         //max = 50.0 width means bar percentage needs to be divided by 2.
