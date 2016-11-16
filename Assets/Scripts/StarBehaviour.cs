@@ -5,11 +5,18 @@ using UnityEngine.UI;
 
 public class StarBehaviour : MonoBehaviour
 {
+    public enum SplitType
+    {
+        Normal,
+        Aura,
+        NoCol
+    };
+
     // Star variables
     private StarBehaviour selectedStar;
     public StarBehaviour[] allStars;
-    public GameObject StarObject;
     public GameManager.StarType starType;
+    private SplitType splitType;
     public LevelManager levelManager;
 
     public StarManager starLinkManager;  //Handle to the starlink manager.
@@ -172,19 +179,45 @@ public class StarBehaviour : MonoBehaviour
     void SplitBehaviour(StarBehaviour currentStar)
     {
         if (!currentStar.alreadySplit)
-        { 
-            GameObject CloneOne = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
-            GameObject CloneTwo = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
-            GameObject CloneThree = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+        {
+            GameObject CloneOne;
+            GameObject CloneTwo;
+            GameObject CloneThree;
 
-            CloneOne.transform.parent = currentStar.transform;
-            CloneTwo.transform.parent = currentStar.transform;
-            CloneThree.transform.parent = currentStar.transform;
-
-
-            currentStar.alreadySplit = true;
-
-            currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
+            switch (splitType)
+            {
+                case SplitType.Normal:
+                    CloneOne = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
+                    CloneTwo = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                    CloneThree = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+                    CloneOne.transform.parent = currentStar.transform;
+                    CloneTwo.transform.parent = currentStar.transform;
+                    CloneThree.transform.parent = currentStar.transform;
+                    currentStar.alreadySplit = true;
+                    currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
+                    break;
+                case SplitType.NoCol:
+                    CloneOne = Instantiate(Resources.Load("No Collision Star"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
+                    CloneTwo = Instantiate(Resources.Load("No Collision Star"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                    CloneThree = Instantiate(Resources.Load("No Collision Star"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+                    CloneOne.transform.parent = currentStar.transform;
+                    CloneTwo.transform.parent = currentStar.transform;
+                    CloneThree.transform.parent = currentStar.transform;
+                    currentStar.alreadySplit = true;
+                    currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
+                    break;
+                case SplitType.Aura:
+                    CloneOne = Instantiate(Resources.Load("Aura Star"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
+                    CloneTwo = Instantiate(Resources.Load("Aura Star"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                    CloneThree = Instantiate(Resources.Load("Aura Star"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
+                    CloneOne.transform.parent = currentStar.transform;
+                    CloneTwo.transform.parent = currentStar.transform;
+                    CloneThree.transform.parent = currentStar.transform;
+                    currentStar.alreadySplit = true;
+                    currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
+                    break;
+            }
+            
         }
     }
 
