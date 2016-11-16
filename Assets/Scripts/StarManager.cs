@@ -342,7 +342,6 @@ public class StarManager : MonoBehaviour
 
     private float GetCurrentLevelMaxEnergy()
     {
-        currentLevel = PlayerPrefs.GetInt("LastLevelComplete");
         Debug.Log("currentLevel:" + currentLevel);
         if (currentLevel == 1)
         {

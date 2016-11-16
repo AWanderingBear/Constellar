@@ -348,7 +348,7 @@ MonoBehaviour:
   firstSelected: 0
   drawing: 0
   timeElapsed: 0
-  currentLevel: 0
+  currentLevel: 1
   numLinkedStars: 1
 --- !u!4 &1102695672
 Transform:
