@@ -160,10 +160,12 @@ public class StarManager : MonoBehaviour
                 Debug.Log("Detected collision with: " + vision.collider.tag);
                 drawRay = true;
                 //Debug.Log("hit");
+                totalLengthUsedThisLevel -= 20;
                 LinkStars(_starOne, _starTwo);
                 _starOne.alreadyLinked = true;
                 _starTwo.alreadyLinked = true;
                 // Energy gained linking to a planet
+ 
                 GameManager.tempEnergy += 20;
             }
 
@@ -218,7 +220,12 @@ public class StarManager : MonoBehaviour
 
         //Finding the scale
         connectionLength = Mathf.Sqrt((differenceX * differenceX) + differenceY * differenceY);
-        totalLengthUsedThisLevel += connectionLength;
+
+        if (_starOne.starType != GameManager.StarType.Aura)
+        {
+            totalLengthUsedThisLevel += connectionLength;
+        }
+
         totalLevelEnergyPercentageUsed = 100 - (totalLengthUsedThisLevel / GetCurrentLevelMaxEnergy() * 100);
         //Debug.Log("TotalLength = " + totalLength); //See the total length
 

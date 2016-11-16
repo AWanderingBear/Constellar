@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour {
         Aura,
         NoCol,
         Split,
-        Goal
+        Goal,
+        Planet
     };
 
     // Different types of splitting behaviour

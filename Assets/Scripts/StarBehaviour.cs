@@ -22,7 +22,8 @@ public class StarBehaviour : MonoBehaviour
 
     public SoundManager soundManager;
 
-    private Text restartText;
+
+
     public string scene;
 
     public bool alreadyLinked = false;
@@ -42,8 +43,6 @@ public class StarBehaviour : MonoBehaviour
        
         soundManager = GameObject.Find("Audio Manager").GetComponent<SoundManager>();
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
-
-        restartText = GameObject.Find("RestartText").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -81,6 +80,8 @@ public class StarBehaviour : MonoBehaviour
                     break;
             }
         }
+
+ 
     }
 
     // Processes star linking when mouse is down
@@ -224,8 +225,6 @@ public class StarBehaviour : MonoBehaviour
     {
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
 
-        Scene scene = SceneManager.GetActiveScene();
-
         levelManager.tickLevelCompletion();
 
         PlayerPrefs.SetInt("Stars Linked", starLinkManager.numLinkedStars);
@@ -244,4 +243,6 @@ public class StarBehaviour : MonoBehaviour
             //}
     
     }
+
+
 }
