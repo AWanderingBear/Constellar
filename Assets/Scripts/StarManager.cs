@@ -227,7 +227,7 @@ public class StarManager : MonoBehaviour
         }
 
         totalLevelEnergyPercentageUsed = 100 - (totalLengthUsedThisLevel / GetCurrentLevelMaxEnergy() * 100);
-        //Debug.Log("TotalLength = " + totalLength); //See the total length
+        Debug.Log("TotalLength = " + totalLengthUsedThisLevel); //See the total length
 
 
         //Create the Game Object
@@ -342,35 +342,47 @@ public class StarManager : MonoBehaviour
 
     private float GetCurrentLevelMaxEnergy()
     {
-        int currentLevel = PlayerPrefs.GetInt("Level");  //This line might be wrong.
-
+        currentLevel = PlayerPrefs.GetInt("LastLevelComplete");
+        Debug.Log("currentLevel:" + currentLevel);
         if (currentLevel == 1)
         {
-            return 27.9f;
+            return 30.0f;
         }
         else if (currentLevel == 2)
         {
-            return 100.0f;
+            return 35.0f;
         }
         else if (currentLevel == 3)
         {
-            return 59.85f;
+            return 26.0f;
         }
         else if (currentLevel == 4)
         {
-            return 37.28f;
+            return 79.0f;
         }
         else if (currentLevel == 5)
         {
-            return 100.0f;
+            return 27.0f;
         }
         else if (currentLevel == 6)
         {
-            return 100.0f;
+            return 37.0f;
         }
         else if (currentLevel == 7)
         {
-            return 100.0f;
+            return 8.5f;
+        }
+        else if (currentLevel == 8)
+        {
+            return 45.0f;
+        }
+        else if (currentLevel == 9)
+        {
+            return 65.0f;
+        }
+        else if (currentLevel == 10)
+        {
+            return 49.0f;
         }
         Debug.Log("Getting current level isn't working. Fix this function please.");
         return -1;
