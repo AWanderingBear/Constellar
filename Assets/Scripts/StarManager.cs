@@ -28,7 +28,11 @@ public class StarManager : MonoBehaviour
     private bool selected;
     public bool drawing;
 
+    public float timeElapsed;
+
     public int currentLevel;   //This shouldnt be hard coded. If this is left in remove it and fix the bottom func.
+
+    public int numLinkedStars = 1;
 
     void Start()
     {
@@ -40,6 +44,8 @@ public class StarManager : MonoBehaviour
 
     void Update()
     {
+        timeElapsed += Time.deltaTime;
+
         if (selected)
         {
             // keep drawing and updating the line position if mouse if being held
@@ -234,6 +240,8 @@ public class StarManager : MonoBehaviour
         line.SetPosition(1, new Vector3(_starTwo.transform.position.x, _starTwo.transform.position.y, 1.0f));
 
         Destroy(tempConnection);
+
+        numLinkedStars += 1;
     }
 
     void DrawLine(StarBehaviour _starOne, Vector3 mousePos)
