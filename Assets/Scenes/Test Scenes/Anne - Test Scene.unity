@@ -360,6 +360,10 @@ MonoBehaviour:
   LinkHolder: {fileID: 1223424760}
   EnergyCanvasPrefab: {fileID: 1259394063525558, guid: 3bd317d2022b63749a68b55bed0bc85e,
     type: 2}
+  regularStarG: {fileID: 0}
+  auraStarG: {fileID: 0}
+  voidStarG: {fileID: 0}
+  splitStarG: {fileID: 0}
   mousePos: {x: 0, y: 0, z: 0}
   connectionLength: 0
   totalLengthUsedThisLevel: 0
@@ -618,7 +622,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010431287400, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.055806268
+      value: 0.049528066
       objectReference: {fileID: 0}
     - target: {fileID: 4000010431287400, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalScale.y
@@ -825,6 +829,21 @@ Prefab:
       propertyPath: starType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 212000011136285646, guid: 33dc695b111c1464798beb417c500f89,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212000011136285646, guid: 33dc695b111c1464798beb417c500f89,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212000011136285646, guid: 33dc695b111c1464798beb417c500f89,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33dc695b111c1464798beb417c500f89, type: 2}
   m_IsPrefabParent: 0
@@ -1026,11 +1045,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000010431287400, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.41
+      value: -0.85
       objectReference: {fileID: 0}
     - target: {fileID: 4000010431287400, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.07
+      value: 2.11
       objectReference: {fileID: 0}
     - target: {fileID: 4000010431287400, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1058,7 +1077,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011076198496, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.85
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4000011076198496, guid: 22e4f05a2886292438e3a600d58ee58e, type: 2}
       propertyPath: m_LocalPosition.y

@@ -36,6 +36,7 @@ public class StarBehaviour : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
+
     // Use this for initialization
     void Start()
     {
