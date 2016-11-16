@@ -5,18 +5,16 @@ using UnityEngine.UI;
 
 public class StarBehaviour : MonoBehaviour
 {
-    public enum SplitType
-    {
-        Normal,
-        Aura,
-        NoCol
-    };
+
+    private GameObject CloneOne;
+    private GameObject CloneTwo;
+    private GameObject CloneThree;
+
 
     // Star variables
     private StarBehaviour selectedStar;
-    public StarBehaviour[] allStars;
     public GameManager.StarType starType;
-    private SplitType splitType;
+    public GameManager.SplitType splitType;
     public LevelManager levelManager;
 
     public StarManager starLinkManager;  //Handle to the starlink manager.
@@ -180,13 +178,9 @@ public class StarBehaviour : MonoBehaviour
     {
         if (!currentStar.alreadySplit)
         {
-            GameObject CloneOne;
-            GameObject CloneTwo;
-            GameObject CloneThree;
-
-            switch (splitType)
+            switch (currentStar.splitType)
             {
-                case SplitType.Normal:
+                case GameManager.SplitType.Normal:
                     CloneOne = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     CloneTwo = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     CloneThree = Instantiate(Resources.Load("RegularStar"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
@@ -196,7 +190,7 @@ public class StarBehaviour : MonoBehaviour
                     currentStar.alreadySplit = true;
                     currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
                     break;
-                case SplitType.NoCol:
+                case GameManager.SplitType.NoCol:
                     CloneOne = Instantiate(Resources.Load("No Collision Star"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     CloneTwo = Instantiate(Resources.Load("No Collision Star"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     CloneThree = Instantiate(Resources.Load("No Collision Star"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
@@ -206,7 +200,7 @@ public class StarBehaviour : MonoBehaviour
                     currentStar.alreadySplit = true;
                     currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
                     break;
-                case SplitType.Aura:
+                case GameManager.SplitType.Aura:
                     CloneOne = Instantiate(Resources.Load("Aura Star"), currentStar.transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     CloneTwo = Instantiate(Resources.Load("Aura Star"), currentStar.transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     CloneThree = Instantiate(Resources.Load("Aura Star"), currentStar.transform.GetChild(2).position, Quaternion.identity) as GameObject;
@@ -215,6 +209,9 @@ public class StarBehaviour : MonoBehaviour
                     CloneThree.transform.parent = currentStar.transform;
                     currentStar.alreadySplit = true;
                     currentStar.GetComponent<SpriteRend>().SwitchSprite(currentStar);
+                    break;
+
+                default:
                     break;
             }
             

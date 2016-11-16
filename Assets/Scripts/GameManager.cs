@@ -19,6 +19,15 @@ public class GameManager : MonoBehaviour {
         Goal
     };
 
+    // Different types of splitting behaviour
+    public enum SplitType
+    {
+        Normal,
+        Aura,
+        NoCol
+    };
+
+
     // Use this for initialization
     void Start () {
         energyText.text = "Current Energy: " + tempEnergy;
