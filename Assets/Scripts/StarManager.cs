@@ -44,6 +44,7 @@ public class StarManager : MonoBehaviour
         EnergyCanvas.transform.parent = this.transform;
         EnergyCanvas.GetComponentInChildren<EnergyBarResizer>().starManager = this;
         totalLevelEnergyPercentageUsed = 100 - (totalLengthUsedThisLevel / GetCurrentLevelMaxEnergy() * 100);
+        currentlySelectedStar.GetComponent<SpriteRenderer>().sprite = regularStarG;
     }
 
     void Update()
@@ -257,17 +258,20 @@ public class StarManager : MonoBehaviour
         switch (_starOne.starType)
         {
             case GameManager.StarType.Normal:
-                Debug.Log("Clicked a Normal Star");
-                //Debug.Log(alreadyLinked);
+                _starOne.GetComponent<SpriteRenderer>().sprite = regularStarG;
+                _starTwo.GetComponent<SpriteRenderer>().sprite = regularStarG;
                 break;
             case GameManager.StarType.NoCol:
                 _starOne.GetComponent<SpriteRenderer>().sprite = voidStarG;
+                _starTwo.GetComponent<SpriteRenderer>().sprite = voidStarG;
                 break;
             case GameManager.StarType.Aura:
                 _starOne.GetComponent<SpriteRenderer>().sprite = auraStarG;
+                _starTwo.GetComponent<SpriteRenderer>().sprite = auraStarG;
                 break;
             case GameManager.StarType.Split:
                 _starOne.GetComponent<SpriteRenderer>().sprite = splitStarG;
+                _starTwo.GetComponent<SpriteRenderer>().sprite = splitStarG;
                 break;
         }
     }

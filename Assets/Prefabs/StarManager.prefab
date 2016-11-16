@@ -88,6 +88,10 @@ MonoBehaviour:
   LinkHolder: {fileID: 1814325312767660}
   EnergyCanvasPrefab: {fileID: 1259394063525558, guid: 3bd317d2022b63749a68b55bed0bc85e,
     type: 2}
+  regularStarG: {fileID: 21300000, guid: 155a7d96e5d3bcb4ba8142dd0a678840, type: 3}
+  auraStarG: {fileID: 21300000, guid: a1ad479ab2a0eb34aad0d8810a594166, type: 3}
+  voidStarG: {fileID: 21300000, guid: 452c9c5c39d8b1241a0d5b36d0b25a8d, type: 3}
+  splitStarG: {fileID: 21300000, guid: 9430df3de9b1f244d8f5b6f005163928, type: 3}
   mousePos: {x: 0, y: 0, z: 0}
   connectionLength: 0
   totalLengthUsedThisLevel: 0
