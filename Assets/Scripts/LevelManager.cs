@@ -54,6 +54,9 @@ public class LevelManager : MonoBehaviour {
             {
                 levelComplete[i] = true;
                 PlayerPrefs.SetInt("LastLevelComplete", i);
+                if (PlayerPrefs.GetInt("Level") < i){
+                    PlayerPrefs.SetInt("Level", i);
+                }
             }
         }
     }

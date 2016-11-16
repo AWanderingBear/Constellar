@@ -243,8 +243,8 @@ public class StarManager : MonoBehaviour
         line.startWidth = 0.5f;
         line.endWidth = 0.5f;
         line.useWorldSpace = true;
-        line.SetPosition(0, new Vector3(_starOne.transform.position.x, _starOne.transform.position.y, 1.0f));
-        line.SetPosition(1, new Vector3(_starTwo.transform.position.x, _starTwo.transform.position.y, 1.0f));
+        line.SetPosition(0, new Vector3(_starOne.transform.position.x, _starOne.transform.position.y, 0.0f));
+        line.SetPosition(1, new Vector3(_starTwo.transform.position.x, _starTwo.transform.position.y, 0.0f));
 
         Destroy(tempConnection);
 
@@ -285,8 +285,8 @@ public class StarManager : MonoBehaviour
 
         //Create the Line Renderer
         line = tempConnection.GetComponent<LineRenderer>();
-        line.startWidth = 0.5f;
-        line.endWidth = 0.5f;
+        line.startWidth = 0.3f;
+        line.endWidth = 0.3f;
         line.useWorldSpace = true;
         line.SetPosition(0, _starOne.transform.position);
         line.SetPosition(1, mousePos);

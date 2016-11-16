@@ -257,15 +257,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Constellation1: {fileID: 1450428083}
-  Constellation2: {fileID: 664285981}
-  Constellation3: {fileID: 1836992524}
-  Constellation4: {fileID: 1466382618}
-  Constellation5: {fileID: 273235744}
-  Constellation6: {fileID: 841508531}
-  Constellation7: {fileID: 0}
-  Constellation8: {fileID: 0}
-  Constellation9: {fileID: 0}
-  Constellation10: {fileID: 0}
+  Constellation2: {fileID: 841508531}
+  Constellation3: {fileID: 1664495937}
+  Constellation4: {fileID: 273235744}
+  Constellation5: {fileID: 1090852079}
+  Constellation6: {fileID: 664285981}
+  Constellation7: {fileID: 1466382618}
+  Constellation8: {fileID: 1836992524}
+  Constellation9: {fileID: 1630958284}
+  Constellation10: {fileID: 1854935224}
   CurrentLevel: 0
 --- !u!4 &186656471
 Transform:
@@ -279,9 +279,9 @@ Transform:
   m_Children:
   - {fileID: 1450428086}
   - {fileID: 841508533}
-  - {fileID: 1090852080}
-  - {fileID: 273235746}
   - {fileID: 1664495938}
+  - {fileID: 273235746}
+  - {fileID: 1090852080}
   - {fileID: 664285983}
   - {fileID: 1466382620}
   - {fileID: 1836992526}
@@ -365,14 +365,13 @@ GameObject:
   - component: {fileID: 273235745}
   - component: {fileID: 273235748}
   - component: {fileID: 273235747}
-  - component: {fileID: 273235749}
   m_Layer: 0
   m_Name: Seed_constellation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &273235745
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -415,8 +414,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 273235744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.46, y: 3.34, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: 8.28, y: 3.34, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 718395997}
   m_Father: {fileID: 186656471}
@@ -448,21 +447,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0.000000030035153, y: -0.0000038146973}
   serializedVersion: 2
-  m_Size: {x: 19.199999, y: 10.799999}
---- !u!61 &273235749
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 273235744}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0.0000038146973, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 16, y: 10}
 --- !u!1 &335000655
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,14 +671,13 @@ GameObject:
   - component: {fileID: 664285982}
   - component: {fileID: 664285985}
   - component: {fileID: 664285984}
-  - component: {fileID: 664285986}
   m_Layer: 0
   m_Name: Firefly_Constellation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &664285982
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -736,8 +720,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 664285981}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.29, y: -0.58, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: -2.85, y: -0.23, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 755594551}
   m_Father: {fileID: 186656471}
@@ -755,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Context: {fileID: 755594550}
-  ConstellationID: 2
+  ConstellationID: 6
 --- !u!61 &664285985
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -769,21 +753,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0.000000059604645, y: 0}
   serializedVersion: 2
-  m_Size: {x: 19.199999, y: 10.799999}
---- !u!61 &664285986
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 664285981}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 14, y: 10}
 --- !u!1 &718395996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &841508532
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1269,7 +1239,7 @@ Transform:
   m_GameObject: {fileID: 841508531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.8, y: 3.16, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 806689656}
   m_Father: {fileID: 186656471}
@@ -1756,13 +1726,14 @@ GameObject:
   - component: {fileID: 1090852080}
   - component: {fileID: 1090852082}
   - component: {fileID: 1090852081}
+  - component: {fileID: 1090852083}
   m_Layer: 0
   m_Name: Constellation_Bat_Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1090852080
 Transform:
   m_ObjectHideFlags: 0
@@ -1770,12 +1741,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1090852079}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5852065, y: 2.625739, z: 0}
+  m_LocalPosition: {x: -7.26, y: -0.2, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
   - {fileID: 335000656}
   m_Father: {fileID: 186656471}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1090852081
 BoxCollider2D:
@@ -1826,6 +1797,19 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &1090852083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1090852079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f38baaa5ba3df4b8f5d7b8cdad69e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Context: {fileID: 335000655}
+  ConstellationID: 5
 --- !u!1 &1116579857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,8 +2189,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1450428083}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.688992, y: 3.55, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: -7.62, y: 3.55, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 817211792}
   m_Father: {fileID: 186656471}
@@ -2251,14 +2235,13 @@ GameObject:
   - component: {fileID: 1466382619}
   - component: {fileID: 1466382622}
   - component: {fileID: 1466382621}
-  - component: {fileID: 1466382623}
   m_Layer: 0
   m_Name: Rabbit_Constellation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1466382619
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2301,8 +2284,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1466382618}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.68, y: -0.5, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: 1.91, y: -0.5, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 873972114}
   m_Father: {fileID: 186656471}
@@ -2320,7 +2303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Context: {fileID: 873972113}
-  ConstellationID: 4
+  ConstellationID: 7
 --- !u!61 &1466382622
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2334,21 +2317,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 19.199999, y: 10.799999}
---- !u!61 &1466382623
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1466382618}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 14, y: 10}
 --- !u!1 &1541355610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,13 +2454,14 @@ GameObject:
   - component: {fileID: 1630958285}
   - component: {fileID: 1630958287}
   - component: {fileID: 1630958286}
+  - component: {fileID: 1630958288}
   m_Layer: 0
   m_Name: Catch_Constellation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1630958285
 Transform:
   m_ObjectHideFlags: 0
@@ -2499,7 +2469,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1630958284}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.0989923, y: -2.7642612, z: 0}
+  m_LocalPosition: {x: -6.41, y: -3.11, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1777543233}
@@ -2555,6 +2525,19 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &1630958288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1630958284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f38baaa5ba3df4b8f5d7b8cdad69e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Context: {fileID: 1777543232}
+  ConstellationID: 9
 --- !u!1 &1664495937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2565,13 +2548,14 @@ GameObject:
   - component: {fileID: 1664495938}
   - component: {fileID: 1664495940}
   - component: {fileID: 1664495939}
+  - component: {fileID: 1664495941}
   m_Layer: 0
   m_Name: Constellation_Shark_Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1664495938
 Transform:
   m_ObjectHideFlags: 0
@@ -2579,12 +2563,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1664495937}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.6989923, y: 0.36643887, z: 0}
+  m_LocalPosition: {x: 3.3, y: 2.84, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
   - {fileID: 223208833}
   m_Father: {fileID: 186656471}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1664495939
 BoxCollider2D:
@@ -2635,6 +2619,19 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &1664495941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1664495937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f38baaa5ba3df4b8f5d7b8cdad69e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Context: {fileID: 223208832}
+  ConstellationID: 3
 --- !u!1 &1777543232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2838,14 +2835,13 @@ GameObject:
   - component: {fileID: 1836992525}
   - component: {fileID: 1836992528}
   - component: {fileID: 1836992527}
-  - component: {fileID: 1836992529}
   m_Layer: 0
   m_Name: Frog_constellation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1836992525
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2888,8 +2884,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1836992524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.61, y: -0.06, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: 7.69, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1230597318}
   m_Father: {fileID: 186656471}
@@ -2907,7 +2903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Context: {fileID: 1230597317}
-  ConstellationID: 3
+  ConstellationID: 8
 --- !u!61 &1836992528
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2921,21 +2917,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 19.199999, y: 10.799999}
---- !u!61 &1836992529
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1836992524}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0.0000038146973, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 17, y: 10}
 --- !u!1 &1854935224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2946,13 +2928,14 @@ GameObject:
   - component: {fileID: 1854935225}
   - component: {fileID: 1854935227}
   - component: {fileID: 1854935226}
+  - component: {fileID: 1854935228}
   m_Layer: 0
   m_Name: Spark_Constellations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1854935225
 Transform:
   m_ObjectHideFlags: 0
@@ -2960,7 +2943,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1854935224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.2860727, y: -3.0642614, z: 0}
+  m_LocalPosition: {x: 7.44, y: -3.34, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1836068087}
@@ -3016,6 +2999,19 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &1854935228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1854935224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f38baaa5ba3df4b8f5d7b8cdad69e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Context: {fileID: 1836068086}
+  ConstellationID: 10
 --- !u!1 &1900496541
 GameObject:
   m_ObjectHideFlags: 0

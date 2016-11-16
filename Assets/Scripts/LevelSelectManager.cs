@@ -26,7 +26,7 @@ public class LevelSelectManager : MonoBehaviour
     {
 
         CurrentLevel = PlayerPrefs.GetInt("Level", 0);
-        retrieveCurrentLevel();
+        //retrieveCurrentLevel();
         Debug.Log("Current level: " + CurrentLevel);
         if (CurrentLevel == 0)
         {
