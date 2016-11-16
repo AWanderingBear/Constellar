@@ -12,7 +12,7 @@ public class LevelEndManager : MonoBehaviour {
     void Start () {
 
         StarCountText.text = PlayerPrefs.GetInt("Stars Linked").ToString();
-        TimeTakenText.text = PlayerPrefs.GetFloat("Stars Linked").ToString();
+        TimeTakenText.text = PlayerPrefs.GetFloat("Time elapsed").ToString();
 
         int ExpectedCount = 0;
         string Fluff = "";

@@ -40,4 +40,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game Scenes/Level 4.unity
   - enabled: 1
+    path: Assets/Scenes/Game Scenes/Level 5.unity
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/Level 6.unity
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/Level 7.unity
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/Level 8.unity
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/Level 9.unity
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/Level 10.unity
+  - enabled: 1
     path: Assets/Scenes/Game Scenes/End Level.unity

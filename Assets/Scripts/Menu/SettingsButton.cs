@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VolumeButton : MonoBehaviour {
 
@@ -24,7 +25,7 @@ public class VolumeButton : MonoBehaviour {
     void OnMouseDown()
     {
 
-        SwapIcon();
+        SceneManager.LoadScene("Instructions");
     }
 
     void OnMouseOver()
